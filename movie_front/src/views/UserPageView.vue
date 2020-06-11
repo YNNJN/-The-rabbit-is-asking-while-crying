@@ -1,6 +1,7 @@
 <template>
   <div class="p-5">
     <h1>user page</h1>
+    
   </div>
 </template>
 
@@ -12,6 +13,12 @@ export default {
   },
   data() {
 
+  },
+  props: {
+    follower: {
+      type: Object,
+      required: true,
+    }
   },
   methods: {
 
