@@ -26,6 +26,9 @@
           <li class="nav-item">
             <router-link v-if="isLoggedIn" @click.native="logout" class='nav-link text-dark pt-5' to="/accounts/logout">Logout</router-link>
           </li>
+          <li class="nav-item">
+            <router-link v-if="isLoggedIn" class='nav-link text-dark pt-5' to="/accounts/userpage">Userpage</router-link>
+          </li>
         </ul>
       </div>
     </nav>
