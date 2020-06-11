@@ -35,6 +35,19 @@ INSTALLED_APPS = [
     'django_extensions',
     'bootstrap4',
 
+     # DRF
+    'rest_framework',
+
+    # DRF - token auth
+    'rest_framework.authtoken',
+
+    # rest_auth
+    'django.contrib.sites',
+    'rest_auth',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+
     # django original
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,18 +55,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
 
     # my apps
     'movies',
     'articles',
     'accounts',
 
-    # allauth
-    'allauth',
-    'allauth.account',
+    # socialaccount
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+
+    # CORS
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -71,7 +84,7 @@ ROOT_URLCONF = 'final_pjt.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -147,6 +160,12 @@ AUTHENTICATOIN_BACKENDS = (
 
 SITE_ID = 1
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
+
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [
@@ -160,3 +179,5 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 LOGIN_REDIRECT_URL ='/movies/'
+
+CORS_ORIGIN_ALLOW_ALL = True
