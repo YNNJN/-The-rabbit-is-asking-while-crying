@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import SignupView from '../views/accounts/SignupView.vue'
 import LoginView from '../views/accounts/LoginView.vue'
+import ArticleListView from '../views/articles/ArticleListView.vue'
+import ArticleCreateView from '../views/articles/ArticleCreateView.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +23,21 @@ Vue.use(VueRouter)
     path: '/accounts/login',
     name: 'Login',
     component: LoginView
+  },
+  {
+    path: '/articles',
+    name: 'List',
+    component: ArticleListView
+  },
+  {
+    path: '/articles/create',
+    name: 'New',
+    component: ArticleCreateView,
+    beforeEnter: (to, from, next) => {
+      if (!Vue.$cookies.isKey('auth-token')) {
+        next({ name: 'Login' })
+      } else { next() }
+    }
   },
 ]
 
