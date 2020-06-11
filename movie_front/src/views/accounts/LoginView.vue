@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>LOG IN</h1>
+    <h1 class="p-5">LOG IN</h1>
     <div class="container text-left">
       <div class="form-group">
         <label for="exampleInputID">ID</label>
@@ -10,7 +10,7 @@
         <label for="exampleInputPassword1">PASSWORD</label>
         <input type="password" class="form-control" id="exampleInputPassword1" v-model="loginInfo.password">
       </div>
-      <button type="submit" class="btn btn-primary" @click="emitLoginSubmit">Log In</button>
+      <button type="submit" class="btn btn-warning" @click="emitLoginSubmit">Log In</button>
     </div>
   </div>
 </template>

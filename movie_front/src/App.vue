@@ -1,11 +1,27 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link v-if="!isLoggedIn" to="/accounts/signup">Signup</router-link> | 
-      <router-link v-if="!isLoggedIn" to="/accounts/login">Login</router-link>
-      <router-link @click.native="logout" v-if="isLoggedIn" to="/accounts/logout">Logout</router-link> 
-    </div>
+  <div id="app" class="back">
+    <nav class="navbar navbar-expand-lg sticky-top p-5">
+      <div class="navbar" style="position: absolute; left: 50%; transform: translateX(-50%);">
+        <router-link to="/" class="text-dark text-decoration-none pt-5"><strong>Home</strong></router-link>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <router-link v-if="!isLoggedIn" class='nav-link text-dark pt-5' to="/accounts/signup">Signup</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link v-if="!isLoggedIn" class='nav-link text-dark pt-5' to="/accounts/login">Login</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link @click.native="logout" class='nav-link text-dark pt-5' to="/accounts/logout">Logout</router-link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
     <router-view
       @login-submit="login"
       @signup-submit="signup"
@@ -77,20 +93,20 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  font-size: 1.3rem;
 }
 
-#nav {
-  padding: 30px;
+.back {
+  min-height: 100vh;
+  background: #FFD300;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.navbar {
+  background: #FFD300;
 }
 
-#nav a.router-link-exact-active {
-  color: #1F45FC;
+.nav-item {
+  font-size: 0.9rem;
 }
 </style>
+

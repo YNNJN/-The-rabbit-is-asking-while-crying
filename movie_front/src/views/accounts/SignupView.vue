@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-5">
     <h1>SIGN UP</h1>
     <div class="container text-left">
       <div class="form-group">
@@ -21,7 +21,7 @@
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
         <label class="form-check-label" for="exampleCheck1">Check me out</label>
       </div>
-      <button type="submit" class="btn btn-info" @click="emitSignupSubmit">Sign Up</button>
+      <button type="submit" class="btn btn-warning" @click="emitSignupSubmit">Sign Up</button>
     </div>
   </div>
 </template>
