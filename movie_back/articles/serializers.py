@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from accounts.serializers import UserSerializer
 from .models import Article, Movie, Comment
-from . import ArticleSerializer
 
 class ArticleListSerializer(serializers.ModelSerializer):
     user = UserSerializer()
