@@ -2,7 +2,7 @@
   <div id="app" class="back">
     <nav class="navbar navbar-expand-lg sticky-top p-5">
       <div class="navbar" style="position: absolute; left: 50%; transform: translateX(-50%);">
-        <router-link to="/" class="text-dark text-decoration-none pt-5"><strong>Home</strong></router-link>
+        <router-link to="/" class="text-dark text-decoration-none pt-5"><strong>토끼가 울며 여짜오되</strong></router-link>
       </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -10,24 +10,24 @@
       <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link class='nav-link text-dark pt-5' to="/articles">Community</router-link>
+            <router-link class='nav-link pt-5' to="/articles">Community</router-link>
           </li>
           <li class="nav-item">
-            <router-link v-if="isLoggedIn" class='nav-link text-dark pt-5' to="/articles/create">New</router-link>
+            <router-link v-if="isLoggedIn" class='nav-link pt-5' to="/articles/create">New</router-link>
           </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link v-if="!isLoggedIn" class='nav-link text-dark pt-5' to="/accounts/signup">Signup</router-link>
+            <router-link v-if="!isLoggedIn" class='nav-link pt-5' to="/accounts/signup">Signup</router-link>
           </li>
           <li class="nav-item">
-            <router-link v-if="!isLoggedIn" class='nav-link text-dark pt-5' to="/accounts/login">Login</router-link>
+            <router-link v-if="!isLoggedIn" class='nav-link pt-5' to="/accounts/login">Login</router-link>
           </li>
           <li class="nav-item">
-            <router-link v-if="isLoggedIn" @click.native="logout" class='nav-link text-dark pt-5' to="/accounts/logout">Logout</router-link>
+            <router-link v-if="isLoggedIn" class='nav-link pt-5' to="/accounts/userpage">Userpage</router-link>
           </li>
           <li class="nav-item">
-            <router-link v-if="isLoggedIn" class='nav-link text-dark pt-5' to="/accounts/userpage">Userpage</router-link>
+            <router-link v-if="isLoggedIn" @click.native="logout" class='nav-link pt-5' to="/accounts/logout">Logout</router-link>
           </li>
         </ul>
       </div>
@@ -109,15 +109,30 @@ export default {
 
 .back {
   min-height: 100vh;
-  background: #FFD300;
+  background: #020815;
 }
 
 .navbar {
-  background: #FFD300;
+  background: #020815;
 }
 
 .nav-item {
   font-size: 0.9rem;
+}
+
+.nav-link {
+  color: #c5fb20;
+  font-family: 'NeoDunggeunmo';
+  font-weight: normal;
+  font-style: normal;
+}
+
+strong {
+  color: #c5fb20;
+  font-size: 1.5rem;
+  font-family: 'NeoDunggeunmo';
+  font-weight: normal;
+  font-style: normal;
 }
 </style>
 
