@@ -14,7 +14,11 @@
         <tbody>
           <tr v-for="( article, index ) in reverse" :key="article.id">
             <th scope="row">{{ index+1 }}</th>
-            <td><button class="btn" data-toggle="modal" :data-target="articleModalId(article)" @click="addHits(article)">{{ article.title }}</button> <span v-if="index+1 == 1" class="badge badge-danger">New</span></td>
+            <router-link :to="{ name: 'Detail', params: { articleId: article.id }, query: {title: article.title, content: article.content, user: article.user}}">
+              <td>
+                <button class="btn" data-toggle="modal" :data-target="articleModalId(article)" @click="addHits(article)">{{ article.title }}</button> <span v-if="index+1 == 1" class="badge badge-danger">New</span>
+              </td>
+            </router-link>
             <div class="modal fade" :id="modalId(article)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">

@@ -26,8 +26,8 @@ def create(request):
 
 @api_view(['GET'])
 def detail(request, article_pk):
-    article = get_object_or_404(Article, pk=article_pk)
-    serializer = ArticleSerializer(article)
+    comment = Comment.objects.all()
+    serializer = CommentSerializer(comment)
     return Response(serializer.data)
 
 @api_view(['POST'])
