@@ -39,7 +39,7 @@
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   </div>
-                  <p>'내가범인' {{ article }}</p>
+                  <p>'내가범인' `1{}1`</p>
                 </div>
               </div>
             </div>
