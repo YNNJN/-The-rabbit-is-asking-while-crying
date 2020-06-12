@@ -14,11 +14,10 @@
         <tbody>
           <tr v-for="( article, index ) in reverse" :key="article.id">
             <th scope="row">{{ index+1 }}</th>
-            <router-link :to="{ name: 'Detail', params: { articleId: article.id }, query: {title: article.title, content: article.content, user: article.user}}">
-              <td>
-                <button class="btn" data-toggle="modal" :data-target="articleModalId(article)" @click="addHits(article)">{{ article.title }}</button> <span v-if="index+1 == 1" class="badge badge-danger">New</span>
-              </td>
-            </router-link>
+            <td>
+              <button class="btn" data-toggle="modal" :data-target="articleModalId(article)" @click="addHits(article)">{{ article.title }}</button>
+              <span v-if="index+1 == 1" class="badge badge-danger">New</span>
+            </td>
             <div class="modal fade" :id="modalId(article)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -29,11 +28,18 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <p>{{ article.content }}</p>
+                    <hr>
+                    <div class="input-group">
+                      <input type="text" name="comment" class="form-control border-0 rounded-0 text-secondary" v-model="commentData.content" placeholder="댓글달기...">
+                      <div class="input-group-append">
+                        <button @click="createComment(article)" class="btn rounded-0 text-primary" type="submit">게시</button>
+                      </div>
+                    </div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   </div>
+                  <p>'내가범인' {{ article }}</p>
                 </div>
               </div>
             </div>
@@ -56,7 +62,14 @@ export default {
   data() {
     return {
       articles: [],
+      comments: [],
+      commentData: {
+        content: '',
+      },
     }
+  },
+  props: {
+
   },
   computed: {
     reverse() {
@@ -84,7 +97,22 @@ export default {
       article.hits++
       axios.put(SERVER_URL + `articles/hits/${article.id}/`, article, config)
         .catch(err => console.log(err))
-    }
+    },
+    createComment(article) {
+      const config = {
+        headers: {
+          Authorization: `Token ${this.$cookies.get('auth-token')}`
+        }
+      }
+      axios.post(SERVER_URL + `articles/${article.id}/comment_create/`, this.commentData, config)
+        .then(res => {
+          console.log(res.data)
+          this._data.comments.push(res.data.content)  
+          console.log(this._data.comments)        
+          // this.$router.push({ name: 'Detail', params: { article_pk: `article_${article.id}` }})
+        })
+        .catch(err => console.log(err))
+    },
   },
   created() {
     this.fetchArticles()
