@@ -29,6 +29,7 @@
                   </div>
                   <div class="modal-body">
                     <p>{{ article.content }}</p>
+                    <p v-for="comment in comments" :key="comment.id">{{ comment }}</p>
                     <hr>
                     <div class="input-group">
                       <input type="text" name="comment" class="form-control border-0 rounded-0 text-secondary" v-model="commentData.content" placeholder="댓글달기...">
@@ -62,6 +63,7 @@ export default {
   data() {
     return {
       articles: [],
+      comments: [],
       commentData: {
         content: '',
       },
@@ -106,7 +108,8 @@ export default {
       axios.post(SERVER_URL + `articles/${article.id}/comment_create/`, this.commentData, config)
         .then(res => {
           console.log(res.data)
-
+          this._data.comments.push(res.data.content)
+          this._data.commentData.content = ''        
           // this.$router.push({ name: 'Detail', params: { article_pk: `article_${article.id}` }})
         })
         .catch(err => console.log(err))
