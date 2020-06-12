@@ -28,7 +28,6 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <p>{{ article.content }}</p>
                     <hr>
                     <div class="input-group">
                       <input type="text" name="comment" class="form-control border-0 rounded-0 text-secondary" v-model="commentData.content" placeholder="댓글달기...">
@@ -40,6 +39,7 @@
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   </div>
+                  <p>'내가범인' `1{}1`</p>
                 </div>
               </div>
             </div>
@@ -62,6 +62,7 @@ export default {
   data() {
     return {
       articles: [],
+      comments: [],
       commentData: {
         content: '',
       },
@@ -106,7 +107,8 @@ export default {
       axios.post(SERVER_URL + `articles/${article.id}/comment_create/`, this.commentData, config)
         .then(res => {
           console.log(res.data)
-          
+          this._data.comments.push(res.data.content)  
+          console.log(this._data.comments)        
           // this.$router.push({ name: 'Detail', params: { article_pk: `article_${article.id}` }})
         })
         .catch(err => console.log(err))

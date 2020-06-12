@@ -6,7 +6,6 @@ import LoginView from '../views/accounts/LoginView.vue'
 import UserPageView from '../views/UserPageView.vue'
 import ArticleListView from '../views/articles/ArticleListView.vue'
 import ArticleCreateView from '../views/articles/ArticleCreateView.vue'
-import ArticleDetailView from '../views/articles/ArticleDetailView.vue'
 
 Vue.use(VueRouter)
 
@@ -45,11 +44,6 @@ Vue.use(VueRouter)
         next({ name: 'Login' })
       } else { next() }
     }
-  },
-  {
-    path: '/articles/:articleId',
-    name: 'Detail',
-    component: ArticleDetailView,
   },
 ]
 
