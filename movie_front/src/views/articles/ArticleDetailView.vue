@@ -7,9 +7,8 @@
             <h5 class="cart-text">글쓴이 : {{ $route.query.user.username }}</h5>
             <p class="card-text">{{ $route.query.content }}</p>
         </div>
-        <button @click="onData">check</button>
     </div>
-    <ArticleCommentView :comments="comments"/> // 이안에 이것으로 받아오는게 있었습니다. @comment_data="createComment"
+    <ArticleCommentView :comments="comments" @comment_data="createComment"/>
   </div>
 </template>
 
@@ -40,19 +39,19 @@ export default {
                 console.error(err)
                 })
         },
-    //     createComment() {
-    //         const config = {
-    //             headers: {
-    //                 Authorization: `Token ${this.$cookies.get('auth-token')}`
-    //             }
-    //         }
-    //         axios.post(API_BASE_URL + `articles/${this.$route.query.id}/create/`, this.articleData, config)
-    //             .then(res => { 
-    //             console.log(res.data)
-    //             this.$router.push({ name: 'detail', params: { articleId: ''} })
-    //             })
-    //             .catch(err => console.log(err.response.data))
-    //     },
+        createComment() {
+            const config = {
+                headers: {
+                    Authorization: `Token ${this.$cookies.get('auth-token')}`
+                }
+            }
+            axios.post(API_BASE_URL + `articles/${this.$route.query.id}/create/`, this.articleData, config)
+                .then(res => { 
+                console.log(res.data)
+                this.$router.push({ name: 'detail', params: { articleId: ''} })
+                })
+                .catch(err => console.log(err.response.data))
+        },
     },
     created() {
         this.fetchArticleList()
