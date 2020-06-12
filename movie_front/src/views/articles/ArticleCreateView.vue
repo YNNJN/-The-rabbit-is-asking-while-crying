@@ -28,8 +28,13 @@ export default {
       articleData: {
         title: null,
         content: null,
+        created_at: Date.now(),        
+      },
+      commentData: {
+        title: '',
+        content: '',
         created_at: Date.now(),
-      }
+      },
     };
   },
   methods: {

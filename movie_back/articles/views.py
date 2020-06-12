@@ -26,8 +26,8 @@ def create(request):
 
 @api_view(['GET'])
 def detail(request, article_pk):
-    comment = Comment.objects.all()
-    serializer = CommentSerializer(comment)
+    article = get_object_or_404(Article, pk=article_pk)
+    serializer = ArticleSerializer(article)
     return Response(serializer.data)
 
 @api_view(['POST'])
@@ -36,8 +36,5 @@ def comment_create(request, article_pk):
     serializer = CommentSerializer(data=request.data)
     article = get_object_or_404(Article, pk=article_pk)
     if serializer.is_valid(raise_exception=True):
-        comment = serializer.save(commit=False)
-        comment.user=request.user
-        comment.article=article
-        comment.save()
+        serializer.save(user=request.user, article=article)
         return Response(serializer.data)

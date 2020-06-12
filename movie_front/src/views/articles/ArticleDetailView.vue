@@ -8,26 +8,44 @@
             <p class="card-text">{{ $route.query.content }}</p>
         </div>
     </div>
-    <ArticleCommentView :comments="comments" @comment_data="createComment"/>
+    <div class="container text-left">
+      <div class="form-group">
+        <label for="InputTitle">Title</label>
+        <input type="text" class="form-control" id="InputTitle" aria-describedby="titleHelp"  v-model="commentData.title">
+        <small id="titleHelp" class="form-text text-muted">Please leave an opinion about the movie.</small>
+      </div>
+      <div class="form-group">
+        <label for="InputContent">CONTENT</label>
+        <input type="text" class="form-control" id="InputContent" v-model="commentData.content" row="30">
+      </div>
+      <button type="submit" class="btn btn-success" @click="createComment">Create</button>
+    </div>
+    <ArticleComment :comments="comments"/>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import ArticleCommentView from '@/components/ArticleCommentView.vue'
+import ArticleComment from '@/components/ArticleComment.vue'
 
-const API_BASE_URL = "http://localhost:8000"
+const API_BASE_URL = "http://127.0.0.1:8000/"
 
 export default {
     name: 'ArticleDetailView',
     components: {
-        ArticleCommentView,
+        ArticleComment,
     },
     data() {
         return {
             comments: [],
-        }
-    },
+            commentData: {
+                title: '',
+                content: '',
+                created_at: Date.now(),
+            },
+
+        }    
+    },    
     methods: {
         fetchArticleList() {
             const API_ARTICLE_LIST_URL = API_BASE_URL + "/articles/detail"
@@ -45,13 +63,12 @@ export default {
                     Authorization: `Token ${this.$cookies.get('auth-token')}`
                 }
             }
-            axios.post(API_BASE_URL + `articles/${this.$route.query.id}/create/`, this.articleData, config)
+            axios.post(API_BASE_URL + `articles/${article.id}/create/`, this.commentData, config)
                 .then(res => { 
                 console.log(res.data)
-                this.$router.push({ name: 'detail', params: { articleId: ''} })
                 })
                 .catch(err => console.log(err.response.data))
-        },
+        },        
     },
     created() {
         this.fetchArticleList()
