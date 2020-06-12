@@ -106,7 +106,7 @@ export default {
       axios.post(SERVER_URL + `articles/${article.id}/comment_create/`, this.commentData, config)
         .then(res => {
           console.log(res.data)
-          
+
           // this.$router.push({ name: 'Detail', params: { article_pk: `article_${article.id}` }})
         })
         .catch(err => console.log(err))
