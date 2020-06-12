@@ -8,20 +8,20 @@
             <p class="card-text">{{ $route.query.content }}</p>
         </div>
     </div>
-    <ArticleCommentView :comments="comments" @comment_data="createComment"/>
+    <ArticleComment :comments="comments" @comment_data="createComment"/>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import ArticleCommentView from '@/components/ArticleCommentView.vue'
+import ArticleComment from '@/components/ArticleComment.vue'
 
-const API_BASE_URL = "http://localhost:8000"
+const API_BASE_URL = "http://127.0.0.1:8000/"
 
 export default {
-    name: 'ArticleDetailView',
+    name: 'ArticleDetail',
     components: {
-        ArticleCommentView,
+        ArticleComment,
     },
     data() {
         return {

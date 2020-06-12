@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="ArticleComment">
     <h1>Comment</h1>
     <div class="container text-left">
       <div class="form-group">
@@ -27,7 +27,7 @@
 <script>
 export default {
   name: 'ArticleCommentView',
-  peops: {
+  props: {
     comments: {
       type: Array,
     },

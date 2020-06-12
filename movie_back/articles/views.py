@@ -23,20 +23,26 @@ def create(request):
         serializer.save(user=request.user)
         return Response(serializer.data)
 
-
 @api_view(['GET'])
 def detail(request, article_pk):
-    comment = Comment.objects.all()
-    serializer = CommentSerializer(comment)
+    article = get_object_or_404(Article, pk=article_pk)
+    serializer = ArticleSerializer(article)
     return Response(serializer.data)
+
+@api_view(['PUT'])
+def hits(request, article_pk):
+    article = get_object_or_404(Article, pk=article_pk)
+    article.hits += 1
+    article.save()
+    return Response('done')
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def comment_create(request, article_pk):
-    serializer = CommentSerializer(data=request.data)
     article = get_object_or_404(Article, pk=article_pk)
+    serializer = CommentSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        comment = serializer.save(commit=False)
+        comment = serializer.save(user=request.user)
         comment.user=request.user
         comment.article=article
         comment.save()
