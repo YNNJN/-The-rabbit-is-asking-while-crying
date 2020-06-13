@@ -43,16 +43,16 @@ base_url = 'http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_j
 
 
 # ** 1년 단위로 영화 정보 json 파일로 저장 **
-for year in range(1939, 2021):
+# for year in range(1939, 2021):
 
-    print(year-1938) # iteration 확인 위한 프린트
+#     print(year-1938) # iteration 확인 위한 프린트
 
-    year = str(year)
-    urltemplate = base_url + f'&createDts={year}' + f'&ServiceKey={Servicekey}&listCount=1000&startCount=50'
-    response = requests.get(urltemplate).json() # type : dict
-    # print(response)
-    with open(f'final_pjt/movie_back/movies/fixtures/kmdb_data_{year}.json', 'w', encoding='utf-8') as outfile:
-         json.dump(response, outfile, indent=2)
+#     year = str(year)
+#     urltemplate = base_url + f'&createDts={year}' + f'&ServiceKey={Servicekey}&listCount=1000&startCount=50'
+#     response = requests.get(urltemplate).json() # type : dict
+#     # print(response)
+#     with open(f'final_pjt/movie_back/movies/fixtures/kmdb_data_{year}.json', 'w', encoding='utf-8') as outfile:
+#          json.dump(response, outfile, indent=2)
 
 
 # 총 82번의 iteration이 돌아가야하지만 76 뿐인데, 이유는 2014년도 파일부터 JSONDecodeError가 떴기 때문. 요청횟수 초과로 생각됨.
@@ -64,7 +64,7 @@ for year in range(1939, 2021):
 new_dict = dict()
 for year in range(1939, 2014):
     year = str(year)
-    with open(f'final_pjt/movie_back/movies/fixtures/kmdb_data_{year}.json', 'r', encoding='utf-8') as f:
+    with open(f'final_pjt/movie_back/movies/fixtures/before_data_cleansing/kmdb_data_{year}.json', 'r', encoding='utf-8') as f:
         read = json.load(f)
         data = read['Data'][0]
         results = data['Result']
@@ -73,38 +73,17 @@ for year in range(1939, 2014):
             for movie in results:
                 new_dict[movie['DOCID']] = movie
                 # runtime 속성이 null이면 dict에서 제외함
-                if movie['runtime'] == "":
+                if movie['runtime'] == "" or movie['posters'] == "":
                     del new_dict[movie['DOCID']]
                 
 # print(len(new_dict)) # 중복 id 제거 후 : 데이터 7008 건
 # print(len(new_dict)) # runtime 속성 null 제외 후 : 데이터 6432 건
+# print(len(new_dict)) # posters 속성 null 제외 후 : 데이터 1622 건
 
 # ** 정제한 데이터(new_dict) json 파일로 만듦 **
-with open(f'final_pjt/movie_back/movies/fixtures/after_data_cleansing.json', 'w', encoding='utf-8') as outfile:
+# with open(f'final_pjt/movie_back/movies/fixtures/after_data_cleansing.json', 'w', encoding='utf-8') as outfile:
+#     json.dump(new_dict, outfile, indent=2)
+
+with open(f'final_pjt/movie_back/movies/fixtures/data_poster_exists.json', 'w', encoding='utf-8') as outfile:
     json.dump(new_dict, outfile, indent=2)
 
-
-
-
-
-
-
-
-
-# # test 1. 월 단위로 받는 코드
-# for year in range(1939, 2021):
-#     year = str(year)
-#     for month in ('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'):
-#         date = year + month
-
-# # test 2. 일자별로 받는 코드
-# for year in range(19390101, 20200619):
-
-#     print(year-19390100) # iteration 확인 위한 프린트
-
-    
-#     past = datetime(1939, 1, 1)
-#     recent = datetime(2020, 6, 19)
-#     diff = recent - past # type : object
-#     period = diff.strftime() # type : str
-#     print(period)
