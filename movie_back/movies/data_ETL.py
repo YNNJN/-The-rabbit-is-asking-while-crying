@@ -2,6 +2,9 @@ import requests
 import json
 import pandas as pd
 import csv
+import plotly
+import plotly.figure_factory as ff
+import numpy as np
 # import datetime
 # from datetime import timedelta
 
@@ -107,6 +110,10 @@ with open('final_pjt/movie_back/movies/fixtures/data_poster_exists.json', 'r', e
         columns=[ 'title', 'titleEng', 'directors', 'nation', 'plots', 'runtime', 'rating', 'genre',
             'repRlsDate', 'keywords', 'posters', 'stlls', 'vods', 'audiAcc' ])
 
+
+    # ========================== 데이터 Transform ==========================
+
+
     # 모델에서 숫자 형태로 받고싶은 데이터에 대해 형 변환 진행
     # print(type(result_df['runtime'][0])) # type : str
     # print(type(result_df['audiAcc'][0])) # type : str
@@ -117,8 +124,31 @@ with open('final_pjt/movie_back/movies/fixtures/data_poster_exists.json', 'r', e
 
     # audiAcc은 알 수 없는 값이 존재하여, 에러 처리가 필요함 - NaN으로 표시
     result_df['audiAcc'] = pd.to_numeric(result_df['audiAcc'], errors='coerce')
+    # print(result_df['audiAcc'].dtypes) # type : float64
 
     # print(result_df.dtypes)
     # print(result_df) # [1622 rows x 14 columns]
 
-    df = result_df.to_csv('final_pjt/movie_back/movies/fixtures/data_to_use.csv')
+    # df = result_df.to_csv('final_pjt/movie_back/movies/fixtures/data_to_use.csv')
+
+    
+
+    # ========================== 데이터 test ==========================
+    # runtime 속성의 min, max 값을 알아보자
+    # print(min(result_df['runtime'])) # 최소 3분짜리 영화..!
+    # print(max(result_df['runtime'])) # 최대 576분짜리 영화......!
+
+
+    # ++ 분포도 알 수 있을까?
+    # 코렙에서 아래와 같은 코드로 돌려옴
+    # https://colab.research.google.com/drive/10U2NdXogkYFwo7kNKrXOUuU_vY-EraY1?usp=sharing
+    # np.random.seed(42)
+
+    # x = np.random.randn(1000)
+    # hist_data = [x]
+    # group_labels = ['runtime'] # name of the dataset
+    # colors = ['rgb(0, 0, 100)']
+
+    # fig = ff.create_distplot(hist_data, group_labels, colors=colors)
+    # fig.update_layout(title_text='Distribution for runtime')
+    # fig.show()
