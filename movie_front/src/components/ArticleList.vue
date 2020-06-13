@@ -12,7 +12,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="( article, index ) in reverse" :key="article.id">
+          <tr v-for="(article, index) in reverse" :key="article.id">
             <th scope="row">{{ index+1 }}</th>
             <td>
               <button class="btn" data-toggle="modal" :data-target="articleModalId(article)" @click="addHits(article)">{{ article.title }}</button>
@@ -39,6 +39,8 @@
                     </div>
                   </div>
                   <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" @click="onEdit(article)" data-dismiss="modal">Edit</button>
+                    <button type="button" class="btn btn-danger" @click="ondelete(article)" data-dismiss="modal">Delete</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   </div>
                 </div>
@@ -59,10 +61,9 @@ import axios from 'axios'
 const SERVER_URL = 'http://127.0.0.1:8000/'
 
 export default {
-  name: 'ArticleListView',
+  name: 'ArticleList',
   data() {
     return {
-      articles: [],
       comments: [],
       commentData: {
         content: '',
@@ -70,7 +71,13 @@ export default {
     }
   },
   props: {
-
+    articles: {
+      type: Array,
+    },
+    article: {
+      type: Array,
+    },
+    isCreate: null,
   },
   computed: {
     reverse() {
@@ -78,11 +85,6 @@ export default {
     },
   },
   methods: {
-    fetchArticles() {
-      axios.get(SERVER_URL + "articles/")
-        .then(res => this.articles = res.data)
-        .catch(err => console.error(err))
-    },
     articleModalId(article) {
       return `#article_${article.id}`
     },
@@ -114,9 +116,23 @@ export default {
         })
         .catch(err => console.log(err))
     },
-  },
-  created() {
-    this.fetchArticles()
+    onEdit(article) {
+      this.article = article
+      console.log(this)
+      this.$emit('editData', this.article)
+    },
+    ondelete(article) {
+      const config = {
+        headers: {
+          Authorization: `Token ${this.$cookies.get('auth-token')}`
+        }
+      }
+      axios.post(SERVER_URL + `articles/${article.id}/delete/`, {}, config)
+        .then(res => {
+          console.log(res.data)
+        })
+        .catch(err => console.log(err))
+    },
   },
 }
 

@@ -9,12 +9,6 @@
       </button>
       <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <router-link class='nav-link pt-5' to="/articles">Community</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link v-if="isLoggedIn" class='nav-link pt-5' to="/articles/create">New</router-link>
-          </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item">

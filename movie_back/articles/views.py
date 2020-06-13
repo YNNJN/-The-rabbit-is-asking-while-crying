@@ -44,3 +44,20 @@ def comment_create(request, article_pk):
     if serializer.is_valid(raise_exception=True):
         serializer.save(user=request.user, article=article)
         return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def update(request, article_pk):
+    article = get_object_or_404(Article, pk=article_pk)
+    serializer = ArticleSerializer(article, data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save(user=request.user)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def delete(request, article_pk):
+    article = get_object_or_404(Article, pk=article_pk)
+    article.delete()
+    serializer = ArticleSerializer(article)
+    return Response(serializer.data)
