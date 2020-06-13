@@ -107,5 +107,18 @@ with open('final_pjt/movie_back/movies/fixtures/data_poster_exists.json', 'r', e
         columns=[ 'title', 'titleEng', 'directors', 'nation', 'plots', 'runtime', 'rating', 'genre',
             'repRlsDate', 'keywords', 'posters', 'stlls', 'vods', 'audiAcc' ])
 
+    # 모델에서 숫자 형태로 받고싶은 데이터에 대해 형 변환 진행
+    # print(type(result_df['runtime'][0])) # type : str
+    # print(type(result_df['audiAcc'][0])) # type : str
+    
+    # runtime은 정제된 값이기 때문에 형 변환이 한번에 가능함
+    result_df = result_df.astype({'runtime': 'int'})
+    # print(result_df['runtime'].dtypes) # int64
+
+    # audiAcc은 알 수 없는 값이 존재하여, 에러 처리가 필요함 - NaN으로 표시
+    result_df['audiAcc'] = pd.to_numeric(result_df['audiAcc'], errors='coerce')
+
+    # print(result_df.dtypes)
     # print(result_df) # [1622 rows x 14 columns]
+
     df = result_df.to_csv('final_pjt/movie_back/movies/fixtures/data_to_use.csv')
