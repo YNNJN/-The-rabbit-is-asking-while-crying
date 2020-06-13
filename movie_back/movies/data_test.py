@@ -1,7 +1,11 @@
 import requests
 import json
+import pandas as pd
+import csv
 # import datetime
 # from datetime import timedelta
+
+# ========================== 데이터 Extraction ==========================
 
 Servicekey = '04SY8J71WZ1Q1761IC2I'
 base_url = 'http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2'
@@ -60,30 +64,48 @@ base_url = 'http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_j
 # 최근의 정보를 받아오지 못했다고 말할 수 없음. 따라서 치명적 결함은 아니라고 생각되어 다음을 진행하기로 함
 
 
-# ** docid 값과 해당 객체를 딕셔너리 형태로 만들어 중복을 제거함 **
-new_dict = dict()
-for year in range(1939, 2014):
-    year = str(year)
-    with open(f'final_pjt/movie_back/movies/fixtures/before_data_cleansing/kmdb_data_{year}.json', 'r', encoding='utf-8') as f:
-        read = json.load(f)
-        data = read['Data'][0]
-        results = data['Result']
+# ========================== 데이터 Cleansing ==========================
 
-        for result in results:
-            for movie in results:
-                new_dict[movie['DOCID']] = movie
-                # runtime 속성이 null이면 dict에서 제외함
-                if movie['runtime'] == "" or movie['posters'] == "":
-                    del new_dict[movie['DOCID']]
+
+# ** docid 값과 해당 객체를 딕셔너리 형태로 만들어 중복을 제거함 **
+# new_dict = dict()
+# for year in range(1939, 2014):
+#     year = str(year)
+#     with open(f'final_pjt/movie_back/movies/fixtures/before_data_cleansing/kmdb_data_{year}.json', 'r', encoding='utf-8') as f:
+#         read = json.load(f)
+#         data = read['Data'][0]
+#         results = data['Result']
+
+#         for result in results:
+#             for movie in results:
+#                 new_dict[movie['DOCID']] = movie
+#                 # runtime 속성이 null이면 dict에서 제외함
+#                 if movie['runtime'] == "" or movie['posters'] == "":
+#                     del new_dict[movie['DOCID']]
                 
 # print(len(new_dict)) # 중복 id 제거 후 : 데이터 7008 건
 # print(len(new_dict)) # runtime 속성 null 제외 후 : 데이터 6432 건
 # print(len(new_dict)) # posters 속성 null 제외 후 : 데이터 1622 건
 
 # ** 정제한 데이터(new_dict) json 파일로 만듦 **
-# with open(f'final_pjt/movie_back/movies/fixtures/after_data_cleansing.json', 'w', encoding='utf-8') as outfile:
+# with open('final_pjt/movie_back/movies/fixtures/after_data_cleansing.json', 'w', encoding='utf-8') as outfile:
 #     json.dump(new_dict, outfile, indent=2)
 
-with open(f'final_pjt/movie_back/movies/fixtures/data_poster_exists.json', 'w', encoding='utf-8') as outfile:
-    json.dump(new_dict, outfile, indent=2)
+# with open('final_pjt/movie_back/movies/fixtures/data_poster_exists.json', 'w', encoding='utf-8') as outfile:
+#     json.dump(new_dict, outfile, indent=2)
 
+
+# ========================== DataFrame으로 변환 ==========================
+
+# json => dict
+with open('final_pjt/movie_back/movies/fixtures/data_poster_exists.json', 'r', encoding='utf-8') as f:
+    result = json.load(f)
+    # print(type(result)) # type : dict
+
+    # dict => DataFrame
+    result_df = pd.DataFrame.from_dict(result, orient='index',
+        columns=[ 'title', 'titleEng', 'directors', 'nation', 'plots', 'runtime', 'rating', 'genre',
+            'repRlsDate', 'keywords', 'posters', 'stlls', 'vods', 'audiAcc' ])
+
+    # print(result_df) # [1622 rows x 14 columns]
+    df = result_df.to_csv('final_pjt/movie_back/movies/fixtures/data_to_use.csv')
