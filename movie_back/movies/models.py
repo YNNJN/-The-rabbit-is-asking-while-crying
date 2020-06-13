@@ -2,29 +2,19 @@ from django.db import models
 from django.conf import settings
 
 # Create your models here.
-import requests
-
-Servicekey = '04SY8J71WZ1Q1761IC2I'
-base_url = 'http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2'
-
-
 class Movie(models.Model):
-    docid = models.IntegerField()
-    title = models.TextField()
-    titleEng = models.TextField()
-    directorEnNm = models.CharField(max_length=100)
-    directorNm = models.CharField(max_length=100)
+    title = models.CharField(max_length=50)
+    titleEng = models.CharField(max_length=100)
+    directors = models.CharField(max_length=100) # 딕셔너리 형태의 데이터라, 한 단계 더 접근해야 함
     nation = models.CharField(max_length=100)
-    prodYear = models.DateTimeField(auto_now_add=True)
-    plot = models.TextField()
+    plots = models.TextField() # 딕셔너리 형태의 데이터라, 한 단계 더 접근해야 함
     runtime = models.IntegerField()
-    ratingGrade = models.TextField()
+    rating = models.CharField(max_length=100)
     genre = models.CharField(max_length=100)
-    releaseDate = models.DateTimeField(auto_now_add=True)
+    repRlsDate = models.DateTimeField(auto_now_add=True)
     keywords = models.TextField()
-    posterUrl = models.TextField()
-    stillUrl = models.TextField()
-    vodUrl = models.TextField()
-    audiAcc = models.IntegerField()
-
+    posters = models.TextField()
+    stlls = models.TextField()
+    vods = models.TextField()
+    audiAcc = models.FloatField() # localize가 False일 때 NumberInput, 그 외에는 TextInput
 
