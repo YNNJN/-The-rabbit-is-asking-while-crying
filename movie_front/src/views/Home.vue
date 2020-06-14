@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    
+    
+
     <div class="p-5">
       <div>
         <p class="lead">시간 떼우기 용도로 영화가 필요한 당신에게</p>
@@ -17,8 +20,18 @@
 </template>
 
 <script>
+// import axios from 'axios'
+
 export default {
   name: 'Home',
+  data() {
+    return {
+      movies: [],
+    }
+  },
+  methods: {
+
+  },
   components: {
     
   }

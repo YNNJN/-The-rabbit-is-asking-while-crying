@@ -22,7 +22,7 @@ class ArticleSerializer(serializers.ModelSerializer):
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
-        fields = '__all__'
+        fields = ('DOCID', 'title', 'titleEng', 'directors', 'nation', 'plots', 'runtime', 'rating', 'genre', 'repRlsDate', 'keywords', 'posters', 'stlls', 'vods', 'audiAcc')
     
 class CommentSerializer(serializers.ModelSerializer):
     user = UserSerializer(required=False)
@@ -30,3 +30,8 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ('id', 'user', 'content', 'article')
+
+class RatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rating
+        fields = ('id', 'score')
