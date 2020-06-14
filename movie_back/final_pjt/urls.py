@@ -19,7 +19,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('articles/', include('articles.urls')),
-    path('movie/', include('movies.urls')),
+    path('movies/', include('movies.urls')),
     # 직접 만든 적은 없지만 rest_auth라는 앱이 생긴다.
     # 로그인 & 로그아웃
     path('rest-auth/', include('rest_auth.urls')),

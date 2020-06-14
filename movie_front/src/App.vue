@@ -106,11 +106,11 @@ export default {
 
 .back {
   min-height: 100vh;
-  background: #020815;
+  background: ffffff;
 }
 
 .navbar {
-  background: #020815;
+  background: ffffff;
 }
 
 .nav-item {
@@ -118,14 +118,14 @@ export default {
 }
 
 .nav-link {
-  color: #c5fb20;
+  color: #98f306;
   font-family: 'NeoDunggeunmo';
   font-weight: normal;
   font-style: normal;
 }
 
 strong {
-  color: #c5fb20;
+  color: #98f306;
   font-size: 1.5rem;
   font-family: 'NeoDunggeunmo';
   font-weight: normal;

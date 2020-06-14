@@ -1,10 +1,7 @@
 import requests
 import json
-import pandas as pd
 import csv
-import plotly
-import plotly.figure_factory as ff
-import numpy as np
+import pandas as pd
 # import datetime
 # from datetime import timedelta
 
@@ -101,14 +98,14 @@ base_url = 'http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_j
 # ========================== DataFrame으로 변환 ==========================
 
 # json => dict
-with open('final_pjt/movie_back/movies/fixtures/data_poster_exists.json', 'r', encoding='utf-8') as f:
-    result = json.load(f)
+# with open('final_pjt/movie_back/movies/fixtures/data_poster_exists.json', 'r', encoding='utf-8') as f:
+#     result = json.load(f)
     # print(type(result)) # type : dict
 
     # dict => DataFrame
-    result_df = pd.DataFrame.from_dict(result, orient='index',
-        columns=[ 'title', 'titleEng', 'directors', 'nation', 'plots', 'runtime', 'rating', 'genre',
-            'repRlsDate', 'keywords', 'posters', 'stlls', 'vods', 'audiAcc' ])
+    # result_df = pd.DataFrame.from_dict(result, orient='index',
+    #     columns=[ 'docid', 'title', 'titleEng', 'directors', 'nation', 'plots', 'runtime', 'rating', 'genre',
+    #         'repRlsDate', 'keywords', 'posters', 'stlls', 'vods', 'audiAcc' ])
 
 
     # ========================== 데이터 Transform ==========================
@@ -119,17 +116,17 @@ with open('final_pjt/movie_back/movies/fixtures/data_poster_exists.json', 'r', e
     # print(type(result_df['audiAcc'][0])) # type : str
     
     # runtime은 정제된 값이기 때문에 형 변환이 한번에 가능함
-    result_df = result_df.astype({'runtime': 'int'})
+    # result_df = result_df.astype({'runtime': 'int'})
     # print(result_df['runtime'].dtypes) # int64
 
     # audiAcc은 알 수 없는 값이 존재하여, 에러 처리가 필요함 - NaN으로 표시
-    result_df['audiAcc'] = pd.to_numeric(result_df['audiAcc'], errors='coerce')
+    # result_df['audiAcc'] = pd.to_numeric(result_df['audiAcc'], errors='coerce')
     # print(result_df['audiAcc'].dtypes) # type : float64
 
     # print(result_df.dtypes)
     # print(result_df) # [1622 rows x 14 columns]
 
-    # df = result_df.to_csv('final_pjt/movie_back/movies/fixtures/data_to_use.csv')
+    # df = result_df.to_csv('final_pjt/movie_back/movies/fixtures/data_to_use2.csv')
 
     
 
@@ -142,13 +139,21 @@ with open('final_pjt/movie_back/movies/fixtures/data_poster_exists.json', 'r', e
     # ++ 분포도 알 수 있을까?
     # 코렙에서 아래와 같은 코드로 돌려옴
     # https://colab.research.google.com/drive/10U2NdXogkYFwo7kNKrXOUuU_vY-EraY1?usp=sharing
-    # np.random.seed(42)
 
-    # x = np.random.randn(1000)
-    # hist_data = [x]
-    # group_labels = ['runtime'] # name of the dataset
-    # colors = ['rgb(0, 0, 100)']
 
-    # fig = ff.create_distplot(hist_data, group_labels, colors=colors)
-    # fig.update_layout(title_text='Distribution for runtime')
-    # fig.show()
+# ========================== 데이터 Load ==========================
+
+
+
+
+input_file_name = 'final_pjt/movie_back/movies/fixtures/data_to_use2.csv'
+output_file_name = 'final_pjt/movie_back/movies/fixtures/data_to_use2.json'
+
+with open(input_file_name, "r", encoding="utf-8", newline="") as input_file, \
+    open(output_file_name, "w", encoding="utf-8", newline="") as output_file:
+
+    reader = csv.reader(input_file)
+    col_names = next(reader)
+    for cols in reader:
+        doc = {col_name:col for col_name, col in zip(col_names, cols)}
+        print(json.dumps(doc, ensure_ascii=False), file=output_file)
