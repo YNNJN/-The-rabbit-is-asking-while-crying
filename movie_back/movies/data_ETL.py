@@ -2,6 +2,7 @@ import requests
 import json
 import csv
 import pandas as pd
+from pandas.io.json import json_normalize
 # import datetime
 # from datetime import timedelta
 
@@ -68,16 +69,43 @@ base_url = 'http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_j
 
 
 # ** docid 값과 해당 객체를 딕셔너리 형태로 만들어 중복을 제거함 **
-# new_dict = dict()
-# for year in range(1939, 2014):
-#     year = str(year)
-#     with open(f'final_pjt/movie_back/movies/fixtures/before_data_cleansing/kmdb_data_{year}.json', 'r', encoding='utf-8') as f:
-#         read = json.load(f)
-#         data = read['Data'][0]
-#         results = data['Result']
+movies = dict()
+columns = ['DOCID','title','titleEng','nation','runtime','rating','genre','repRlsDate','keywords','posters','stlls','audiAcc']
 
-#         for result in results:
-#             for movie in results:
+for year in range(1939, 2014):
+    year = str(year)
+    with open(f'final_pjt/movie_back/movies/fixtures/before_data_cleansing/kmdb_data_{year}.json', 'r', encoding='utf-8') as f:
+        read = json.load(f)
+        data = read['Data'][0]
+        results = data['Result']
+        
+        for result in results : 
+            movie = dict()
+            movie['model'] = 'movies.Movie'
+            if result['DOCID'] not in movies.keys():
+                movie['pk'] = result['DOCID'] # pk 값이 integer여야 하나봄
+                if result['runtime'] != '' and result['posters'] != '':
+                    fields = dict()
+                    for colname in columns :
+                        fields[colname] = result[colname]
+                    fields['directorNm'] = result['directors']['director'][0]["directorNm"]
+                    fields["directorEnNm"] = result['directors']['director'][0]["directorEnNm"]
+                    fields['plotLang'] = result['plots']['plot'][0]['plotLang']
+                    fields['plotText'] = result['plots']['plot'][0]['plotText']
+                    fields['vodUrl'] = result['vods']['vod'][0]['vodUrl']
+                    movie['fields'] = fields
+                    movies[movie['pk']] = movie
+        
+        info = list(movies.values())
+
+        with open('final_pjt/movie_back/movies/fixtures/important_data.json', 'w', encoding='utf-8') as outfile:
+            json.dump(info, outfile, indent=2, ensure_ascii=False)
+
+
+
+#with open('final_pjt/movie_back/movies/fixtures/movie.json', 'r', encoding='utf-8') as f:
+#    f.write("""{""")
+#   for movie in results:
 #                 new_dict[movie['DOCID']] = movie
 #                 # runtime 속성이 null이면 dict에서 제외함
 #                 if movie['runtime'] == "" or movie['posters'] == "":
@@ -97,16 +125,29 @@ base_url = 'http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_j
 
 # ========================== DataFrame으로 변환 ==========================
 
-# json => dict
-# with open('final_pjt/movie_back/movies/fixtures/data_poster_exists.json', 'r', encoding='utf-8') as f:
+# # json => dict
+# with open('final_pjt/movie_back/movies/fixtures/for_normalize.json', 'r', encoding='utf-8') as f:
 #     result = json.load(f)
-    # print(type(result)) # type : dict
+#     # json_normalize 위해 밸류만 저장
+#     # result = result.values()
+#     # dict => json
+#     # with open('final_pjt/movie_back/movies/fixtures/for_normalize.json', 'w', encoding='utf-8') as outfile:
+#     #     json.dump(list(result), outfile, indent=2)
 
+#     json_normalize(result, 'directors', ['director', ['directorNm', 'directorEnNm', 'directorId']], record_prefix='director_')
+#     print(result)
+
+    # json_normalize(result)
+    # print(type(result)) # type : dict
+    # json_normalize(result) # 반구조화된 json 객체를 플랫화함
+    # result_df = json_normalize(result[vods][])
+    
+    
     # dict => DataFrame
     # result_df = pd.DataFrame.from_dict(result, orient='index',
-    #     columns=[ 'docid', 'title', 'titleEng', 'directors', 'nation', 'plots', 'runtime', 'rating', 'genre',
+    #     columns=[ 'title', 'titleEng', 'directors', 'nation', 'plots', 'runtime', 'rating', 'genre',
     #         'repRlsDate', 'keywords', 'posters', 'stlls', 'vods', 'audiAcc' ])
-
+    # print(result_df)
 
     # ========================== 데이터 Transform ==========================
 
@@ -143,17 +184,14 @@ base_url = 'http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_j
 
 # ========================== 데이터 Load ==========================
 
+# input_file_name = 'final_pjt/movie_back/movies/fixtures/data_to_use2.csv'
+# output_file_name = 'final_pjt/movie_back/movies/fixtures/data_to_use2.json'
 
+# with open(input_file_name, "r", encoding="utf-8", newline="") as input_file, \
+#     open(output_file_name, "w", encoding="utf-8") as output_file:
 
-
-input_file_name = 'final_pjt/movie_back/movies/fixtures/data_to_use2.csv'
-output_file_name = 'final_pjt/movie_back/movies/fixtures/data_to_use2.json'
-
-with open(input_file_name, "r", encoding="utf-8", newline="") as input_file, \
-    open(output_file_name, "w", encoding="utf-8", newline="") as output_file:
-
-    reader = csv.reader(input_file)
-    col_names = next(reader)
-    for cols in reader:
-        doc = {col_name:col for col_name, col in zip(col_names, cols)}
-        print(json.dumps(doc, ensure_ascii=False), file=output_file)
+#     reader = csv.reader(input_file)
+#     col_names = next(reader)
+#     for cols in reader:
+#         doc = {col_name:col for col_name, col in zip(col_names, cols)}
+#         print(json.dumps(doc, indent=2, ensure_ascii=False), file=output_file)
