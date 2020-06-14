@@ -1,11 +1,8 @@
 <template>
   <div class="p-5">
-    <h1>user page</h1>
-    <div>
-      <button class="btn btn-success" @click="check">check</button>
-    </div>
-    <ArticleCreate :article="article" :isCreate="isCreate" @editCreate="editCreate"/>
+    <h1 class="mb-5 text-center">user page</h1>
     <ArticleList :articles="articles" :isCreate="isCreate" @editData="onEdit"/>
+    <ArticleCreate :article="article" :isCreate="isCreate" @editCreate="editCreate"/>
   </div>
 </template>
 

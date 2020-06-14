@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Create</h1>
     <div class="container text-left">
       <div class="form-group">
         <label for="exampleInputTitle">Title</label>
