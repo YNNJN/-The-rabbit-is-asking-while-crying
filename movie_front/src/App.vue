@@ -9,6 +9,9 @@
       </button>
       <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
         <ul class="navbar-nav">
+          <li class="nav-item">
+            <router-link class='nav-link pt-5' to="/movies/pickmovie">PickMovie</router-link>
+          </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item">

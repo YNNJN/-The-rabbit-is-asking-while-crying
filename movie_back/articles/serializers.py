@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from accounts.serializers import UserSerializer
-from .models import Article, Movie, Comment
+from .models import Article, Comment
 
 class ArticleListSerializer(serializers.ModelSerializer):
     user = UserSerializer()
@@ -18,11 +18,6 @@ class ArticleSerializer(serializers.ModelSerializer):
         model = Article
         fields = '__all__'
         read_only_fields = ('id', 'user', 'created_at', 'updated_at')
-
-class MovieSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Movie
-        fields = '__all__'
     
 class CommentSerializer(serializers.ModelSerializer):
     user = UserSerializer(required=False)
