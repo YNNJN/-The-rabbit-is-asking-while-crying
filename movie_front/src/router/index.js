@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import SignupView from '../views/accounts/SignupView.vue'
 import LoginView from '../views/accounts/LoginView.vue'
 import UserPageView from '../views/UserPageView.vue'
+import PickMovieView from '../views/PickMovieView.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ Vue.use(VueRouter)
     path: '/accounts/userpage',
     name: 'Userpage',
     component: UserPageView
+  },
+  {
+    path: '/movies/pickmovie',
+    name: 'PickMovie',
+    component: PickMovieView
   },
 ]
 

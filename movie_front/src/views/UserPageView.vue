@@ -40,12 +40,6 @@ export default {
         .then(res => this.articles = res.data)
         .catch(err => console.error(err))
     },
-    check() {
-      console.log(this)
-    },
-    updateCreate() {
-      console.log(this)
-    },
     onEdit(article) {
       this.article = article
       this.isCreate=false      

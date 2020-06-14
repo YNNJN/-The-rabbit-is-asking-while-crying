@@ -74,7 +74,7 @@ export default {
       type: Array,
     },
     article: {
-      type: Array,
+      type: Object,
     },
     isCreate: null,
   },
@@ -117,10 +117,10 @@ export default {
     },
     onEdit(article) {
       this.article = article
-      console.log(this)
-      this.$emit('editData', this.article)
+      this.$emit('editData', article)
     },
     ondelete(article) {
+      console.log(article)
       const config = {
         headers: {
           Authorization: `Token ${this.$cookies.get('auth-token')}`
@@ -131,6 +131,9 @@ export default {
           console.log(res.data)
         })
         .catch(err => console.log(err))
+        .then(() =>{
+          this.$router.go()
+        })
     },
   },
 }
