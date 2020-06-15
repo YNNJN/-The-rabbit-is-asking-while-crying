@@ -7,6 +7,10 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import UserSerializer
 
 # Create your views here.
+@api_view(['GET'])
+def profile(request, username):
+    serializer = UserSerializer(intance=request.user)
+    return Response(serializer.data)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
