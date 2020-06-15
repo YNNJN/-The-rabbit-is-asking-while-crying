@@ -1,9 +1,9 @@
 <template>
-  <v-app>
-    <div id="app" class="back">
+  <div id="app" class="back">
+    <v-app>
       <nav class="navbar navbar-expand-lg sticky-top p-5">
         <div class="navbar" style="position: absolute; left: 50%; transform: translateX(-50%);">
-          <router-link to="/" class="text-dark text-decoration-none pt-5"><strong>토끼가 울며 여짜오되</strong></router-link>
+          <router-link to="/" class="text-decoration-none pt-5"><strong class="main_title">토끼가 울며 여짜오되</strong></router-link>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -11,21 +11,21 @@
         <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <router-link class='nav-link pt-5' to="/movies/pickmovie">PickMovie</router-link>
+              <router-link class='nav-link pt-5 text-dark' to="/movies/pickmovie">PickMovie</router-link>
             </li>
           </ul>
           <ul class="navbar-nav">
             <li class="nav-item">
-              <router-link v-if="!isLoggedIn" class='nav-link pt-5' to="/accounts/signup">Signup</router-link>
+              <router-link v-if="!isLoggedIn" class='nav-link pt-5 text-dark' to="/accounts/signup">Signup</router-link>
             </li>
             <li class="nav-item">
-              <router-link v-if="!isLoggedIn" class='nav-link pt-5' to="/accounts/login">Login</router-link>
+              <router-link v-if="!isLoggedIn" class='nav-link pt-5 text-dark' to="/accounts/login">Login</router-link>
             </li>
             <li class="nav-item">
-              <router-link v-if="isLoggedIn" class='nav-link pt-5' to="/accounts/userpage">Userpage</router-link>
+              <router-link v-if="isLoggedIn" class='nav-link pt-5 text-dark' to="/accounts/userpage">Userpage</router-link>
             </li>
             <li class="nav-item">
-              <router-link v-if="isLoggedIn" @click.native="logout" class='nav-link pt-5' to="/accounts/logout">Logout</router-link>
+              <router-link v-if="isLoggedIn" @click.native="logout" class='nav-link pt-5 text-dark' to="/accounts/logout">Logout</router-link>
             </li>
           </ul>
         </div>
@@ -34,8 +34,8 @@
         @login-submit="login"
         @signup-submit="signup"
       />
-    </div>
-  </v-app>
+    </v-app>
+  </div>
 </template>
 
 <script>
@@ -107,29 +107,30 @@ export default {
 
 .back {
   min-height: 100vh;
-  background: ffffff;
+  background: #FCFEFF;
 }
 
 .navbar {
-  background: ffffff;
+  background: #FCFEFF;
 }
 
 .nav-item {
+  color: #1c1c38;
   font-size: 0.9rem;
 }
 
 .nav-link {
-  color: #98f306;
+  color: #1c1c38;
   font-family: 'NeoDunggeunmo';
   font-weight: normal;
   font-style: normal;
 }
 
-strong {
-  color: #98f306;
+.main_title {
+  color: #1c1c38;
   font-size: 1.5rem;
   font-family: 'NeoDunggeunmo';
-  font-weight: normal;
+  font-weight: bold;
   font-style: normal;
 }
 </style>
