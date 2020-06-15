@@ -67,10 +67,8 @@ base_url = 'http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_j
 
 # ========================== 데이터 Cleansing ==========================
 
-
-# ** docid 값과 해당 객체를 딕셔너리 형태로 만들어 중복을 제거함 **
 movies = dict()
-columns = ['DOCID','title','titleEng','nation','runtime','rating','genre','repRlsDate','keywords','posters','stlls','audiAcc']
+columns = ['title','titleEng','nation','runtime','rating','genre','repRlsDate','keywords','posters','stlls']
 
 for year in range(1939, 2014):
     year = str(year)
@@ -96,10 +94,49 @@ for year in range(1939, 2014):
                     movie['fields'] = fields
                     movies[movie['pk']] = movie
         
+        print(len(movies)) # 1622
         info = list(movies.values())
 
         with open('final_pjt/movie_back/movies/fixtures/important_data.json', 'w', encoding='utf-8') as outfile:
             json.dump(info, outfile, indent=2, ensure_ascii=False)
+
+
+# ** docid 값과 해당 객체를 딕셔너리 형태로 만들어 중복을 제거함 **
+# movies = dict()
+# columns = ['DOCID','title','titleEng','nation','runtime','rating','genre','repRlsDate','keywords','posters','stlls','audiAcc']
+
+# for year in range(1939, 2014):
+#     year = str(year)
+#     with open(f'final_pjt/movie_back/movies/fixtures/before_data_cleansing/kmdb_data_{year}.json', 'r', encoding='utf-8') as f:
+#         read = json.load(f)
+#         data = read['Data'][0]
+#         results = data['Result']
+
+#         movie = dict()
+#         movie['model'] = 'movies.Movie'
+#         movie['pk'] = 1
+#         for result in results :
+#             if result['DOCID'] not in movies.keys():
+#                 # movie['pk'] = result['DOCID'] # pk 값이 integer여야 하나봄
+#                 if result['runtime'] != '' and result['posters'] != '':
+#                     movie['pk'] += 1
+#                     fields = dict()
+#                     for colname in columns :
+#                         fields[colname] = result[colname]
+#                     fields['directorNm'] = result['directors']['director'][0]["directorNm"]
+#                     fields["directorEnNm"] = result['directors']['director'][0]["directorEnNm"]
+#                     fields['plotLang'] = result['plots']['plot'][0]['plotLang']
+#                     fields['plotText'] = result['plots']['plot'][0]['plotText']
+#                     fields['vodUrl'] = result['vods']['vod'][0]['vodUrl']
+#                     movie['fields'] = fields
+#                     movies[''] = movie
+#                     # movies[movie['DOCID']] = movie
+#         print(movies)
+#     # infos = list(movies.values())
+    
+#     # with open('final_pjt/movie_back/movies/fixtures/important_data.json', 'w', encoding='utf-8') as outfile:
+#     #     for info in infos:
+#     #         json.dump(info, outfile, indent=2, ensure_ascii=False)
 
 
 
