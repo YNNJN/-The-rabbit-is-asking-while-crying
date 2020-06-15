@@ -13,26 +13,30 @@
         <p class="lead">영감을 얻어요</p>
       </div>
     </div>
-    영화 : {{ movies.title }}
+    <MovieList :movies="movies" />
   </div>
 </template>
 
 <script>
-// import axios from 'axios'
+import MovieList from '@/components/movies/MovieList.vue'
 
 export default {
   name: 'Home',
   data() {
     return {
-      movies: [],
+      
     }
+  },
+  components: {
+    MovieList,
   },
   methods: {
 
   },
-  components: {
-    
+  created () {
+
   }
+
 }
 </script>
 <style>
