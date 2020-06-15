@@ -9,7 +9,6 @@ class Movie(models.Model):
     nation = models.CharField(max_length=100)
     runtime = models.IntegerField()
     rating = models.CharField(max_length=100)
-    check_people = models.IntegerField()
     genre = models.CharField(max_length=100)
     repRlsDate = models.CharField(max_length=10)
     keywords = models.TextField()

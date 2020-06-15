@@ -14,7 +14,7 @@ def index(request):
 @api_view(['GET'])
 def detail(request, movie_id):
     movie = get_object_or_404(Movie, pk=movie_id)
-    serializer = MovieSerializer(instance=movie)
+    serializer = MovieSerializer(movie)
     return Response(serializer.data)
 
 
