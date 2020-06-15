@@ -16,8 +16,11 @@
         </div>
       </div>
     </div>
-    <p class="lead text-center mt-5">가장 빠른 영화를 이곳에서 만나세요 !</p>
-    <div class="MovieView container">
+    <div class="p-3">
+      <p class="lead text-center mt-5">가장 빠른 영화를 이곳에서 만나세요 !</p>
+      <button v-if="showButton" @click="getMovieData" class="start_button btn"><strong>start</strong></button>
+    </div>
+    <div class="list_up container mt-5 p-0">
       <MovieList :movies="movies"/>
     </div>
   </div>
@@ -36,27 +39,27 @@ export default {
   data() {
     return {
       movies: [],
+      showButton: true,
     }
-  },
-  props: {
-    Movies: Array,
   },
   methods: {
     getMovieData() {
+      this.showButton = false
       axios.get(MOIVE_API_URL)
       .then(res => {
-        console.log(res)
+        this.movies = res.data
+        console.log(this.movies)
       })
       .catch(err => {
         console.log(err)
       })
     }
   },
-  created () {
-    axios.get(MOIVE_API_URL)
-    .then(res => this.movies = res.data)
-    .catch(err => console.error(err))
-  }
+  // created () {
+  //   axios.get(MOIVE_API_URL)
+  //   .then(res => this.movies = res.data)
+  //   .catch(err => console.error(err))
+  // }
 }
 </script>
 <style>
@@ -109,4 +112,13 @@ export default {
   height: 240px;
 }
 
+.start_button {
+  display: block;
+  background-color: #d8dcff;
+  font-size: 1.2rem;
+  font-family: 'NeoDunggeunmo';
+  font-weight: bold;
+  font-style: normal;
+  margin: auto;
+}
 </style>

@@ -3,7 +3,7 @@
     <v-app>
       <nav class="navbar navbar-expand-lg sticky-top p-5">
         <div class="navbar" style="position: absolute; left: 50%; transform: translateX(-50%);">
-          <router-link to="/" class="text-decoration-none pt-5"><strong>토끼가 울며 여짜오되</strong></router-link>
+          <router-link to="/" class="text-decoration-none pt-5"><strong class="main_title">토끼가 울며 여짜오되</strong></router-link>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -126,11 +126,11 @@ export default {
   font-style: normal;
 }
 
-strong {
+.main_title {
   color: #1c1c38;
   font-size: 1.5rem;
   font-family: 'NeoDunggeunmo';
-  font-weight: normal;
+  font-weight: bold;
   font-style: normal;
 }
 </style>

@@ -1,16 +1,10 @@
 <template>
-  <div class="p-3">
-    <h1 class="bold text-center">Movie List</h1>
-    <ul>
-      <!-- <li v-for="movie in movies" :key="movie.id">
-        <img :src="movie.posters" :alt="movie.title">
-        <p>제목 : {{ movie.title }}</p>
-      </li> -->
-    </ul>
+  <div>
+    <h1 class="bold mb-4 text-center">Movie List</h1>
     <div class="movieList row">
       <MovieListItem
         :movie="movie"
-        v-for="movie in movies.slice(0,6)"
+        v-for="movie in movies.slice(0,8)"
         :key="movie.id"
       />
     </div>
@@ -18,7 +12,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import MovieListItem from './MovieListItem.vue'
 
 export default {
@@ -32,22 +25,17 @@ export default {
   methods: {
 
   },
-  created () {
-    axios.get('http://127.0.0.1:8000/movies/')
-    .then(res => this.movies = res.data)
-    .catch(err => console.error(err))
-  }
 }
 </script>
 
 <style>
 .bold {
   color: #d8dcff;
-  width: 100%;
   background-color: #1c1c38;
+  width: 44rem;
+  margin: auto;
   font-family: 'NeoDunggeunmo';
   font-weight: bold;
   font-style: normal;
-
 }
 </style>
