@@ -1,6 +1,6 @@
 <template>
-  <div class="p-5">
-    <h1>MovieList</h1>
+  <div class="p-3">
+    <h1 class="bold text-center">Movie List</h1>
     <ul>
       <!-- <li v-for="movie in movies" :key="movie.id">
         <img :src="movie.posters" :alt="movie.title">
@@ -10,7 +10,7 @@
     <div class="movieList row">
       <MovieListItem
         :movie="movie"
-        v-for="movie in movies.slice(0,18)"
+        v-for="movie in movies.slice(0,6)"
         :key="movie.id"
       />
     </div>
@@ -41,5 +41,13 @@ export default {
 </script>
 
 <style>
+.bold {
+  color: #d8dcff;
+  width: 100%;
+  background-color: #1c1c38;
+  font-family: 'NeoDunggeunmo';
+  font-weight: bold;
+  font-style: normal;
 
+}
 </style>
