@@ -11,6 +11,7 @@ class Movie(models.Model):
     plots = models.TextField() # 딕셔너리 형태의 데이터라, 한 단계 더 접근해야 함
     runtime = models.IntegerField()
     rating = models.CharField(max_length=100)
+    check_people = models.IntegerField()
     genre = models.CharField(max_length=100)
     repRlsDate = models.DateTimeField(auto_now_add=True)
     keywords = models.TextField()

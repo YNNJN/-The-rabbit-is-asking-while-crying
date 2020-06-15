@@ -30,6 +30,6 @@ class Comment(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
-class Rating(models.Model):
-    score = models.FloatField()
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name="rating")
+# class Rating(models.Model):
+#     score = models.FloatField()
+#     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name="rating")

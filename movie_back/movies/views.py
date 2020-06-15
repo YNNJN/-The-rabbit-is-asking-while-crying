@@ -11,7 +11,7 @@ import pandas as pd
 @api_view(['GET'])
 def index(request, movie_id):
     movies = get_object_or_404(Movie, pk=movie_id)
-    serializers = MovieSerializer(movies, many=True)
+    serializer = MovieSerializer(movies, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
