@@ -17,6 +17,13 @@ def detail(request, movie_id):
     serializer = MovieSerializer(movie)
     return Response(serializer.data)
 
-
-
+@api_view(['GET'])
+def watched(request, movie_id):
+    movie = get_object_or_404(Movie, pk=movie_id)
+    user = request.user
+    if movie.watched.filter(id=user.id).exists():
+        movie.watched.remove(user)
+    else:
+        movie.watched.add(user)
+    return Response()
         
