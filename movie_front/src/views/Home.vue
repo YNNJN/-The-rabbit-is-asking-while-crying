@@ -1,8 +1,5 @@
 <template>
   <div class="home">
-    
-    
-
     <div class="p-5">
       <div>
         <p class="lead">시간 떼우기 용도로 영화가 필요한 당신에게</p>
@@ -16,6 +13,7 @@
         <p class="lead">영감을 얻어요</p>
       </div>
     </div>
+    영화 : {{ movies.title }}
   </div>
 </template>
 
