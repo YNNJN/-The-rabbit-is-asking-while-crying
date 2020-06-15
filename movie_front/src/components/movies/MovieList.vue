@@ -10,7 +10,7 @@
     <div class="movieList row">
       <MovieListItem
         :movie="movie"
-        v-for="movie in movies"
+        v-for="movie in movies.slice(0,18)"
         :key="movie.id"
       />
     </div>
