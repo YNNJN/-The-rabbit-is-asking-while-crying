@@ -19,3 +19,8 @@ class Movie(models.Model):
     plotLang = models.CharField(max_length=20, null=True)
     plotText = models.TextField()
     vodUrl = models.TextField()
+
+class Rate(models.Model):
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    rate = models.IntegerField()
+    rate_man = models.IntegerField()

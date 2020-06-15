@@ -183,3 +183,7 @@ SOCIALACCOUNT_PROVIDERS = {
 LOGIN_REDIRECT_URL ='/movies/'
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'accounts.serializers.UserSerializer'
+}
