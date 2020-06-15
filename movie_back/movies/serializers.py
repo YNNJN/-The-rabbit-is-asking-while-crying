@@ -4,7 +4,7 @@ from .models import Movie
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
-        fields = fields = ('title', 'titleEng', 'directors', 'nation', 'plots', 'runtime', 'rating', 'genre', 'repRlsDate', 'keywords', 'posters', 'stlls', 'vods', 'audiAcc')
+        fields = fields = ('DOCID', 'title', 'titleEng', 'nation', 'runtime', 'runtime', 'rating', 'genre', 'repRlsDate', 'keywords', 'posters', 'stlls', 'directorNm', 'directorEnNm', 'plotLang', 'plotText', 'vodUrl')
 
 class MoviesSerializer(serializers.Serializer):
     movies = MovieSerializer(many=True, required=False)
