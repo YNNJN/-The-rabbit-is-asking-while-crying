@@ -1,36 +1,36 @@
 <template>
-  <div>
+  <div class="p-5">
     <h1>MovieList</h1>
-    <button @click="addmovie">영화 나와랏</button>
     <ul>
-      <li v-for="movie in movies" :key="movie.id">
+      <!-- <li v-for="movie in movies" :key="movie.id">
         <img :src="movie.posters" :alt="movie.title">
         <p>제목 : {{ movie.title }}</p>
-      </li>
+      </li> -->
     </ul>
+    <div class="movieList row">
+      <MovieListItem
+        :movie="movie"
+        v-for="movie in movies"
+        :key="movie.id"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import MovieListItem from './MovieListItem.vue'
 
 export default {
   name: 'MovieList',
-  data() {
-    return {
-      movies: [],
-    }
+  components: {
+    MovieListItem
   },
   props: {
-    Movies: Array,
+    movies: Array,
   },
   methods: {
-    addmovie() {
-      axios.get('http://127.0.0.1:8000/movies/')
-      .then(res=> {
-        console.log(res.data[1].title) // 데이터가 100개 단위의 배열 형태로 저장되어있음
-      })
-    }
+
   },
   created () {
     axios.get('http://127.0.0.1:8000/movies/')
