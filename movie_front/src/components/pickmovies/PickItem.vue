@@ -1,5 +1,12 @@
 <template>
   <div class="container">
+    <div class="p-5">
+      <v-card>
+        <v-card-text>
+          <v-slider v-model="value" label="How long?" :min="3" :max="140" thumb-label step="10" ticks></v-slider>
+        </v-card-text>
+      </v-card>
+    </div>
     <div class="row">
       <div class="thirty col-6 text-center">
         <button type="button" class="btn text-dark" data-toggle="modal" data-target="#minuteModal">

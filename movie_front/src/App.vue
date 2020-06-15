@@ -30,7 +30,6 @@
           </ul>
         </div>
       </nav>
-
       <router-view
         @login-submit="login"
         @signup-submit="signup"
