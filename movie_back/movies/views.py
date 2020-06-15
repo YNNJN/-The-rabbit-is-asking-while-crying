@@ -4,14 +4,11 @@ from rest_framework.response import Response
 from .models import Movie
 from .serializers import MovieSerializer
 
-import csv
-import pandas as pd
-
 # Create your views here.
 @api_view(['GET'])
-def index(request, movie_id):
-    movies = get_object_or_404(Movie, pk=movie_id)
-    serializers = MovieSerializer(movies, many=True)
+def index(request):
+    movies = Movie.objects.all()
+    serializer = MovieSerializer(instance=movies, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
