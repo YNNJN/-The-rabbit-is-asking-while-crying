@@ -20,18 +20,6 @@ def detail(request, movie_id):
     serializer = MovieSerializer(instance=movie)
     return Response(serializer.data)
 
-def make_db(request):
-    with open('final_pjt/movie_back/movies/fixtures/data_to_use.csv', 'r', encoding='utf-8') as f:
-        read = csv.DictReader(f)
-        df = pd.DataFrame(read)
-
-    datas = []
-    # ,title,titleEng,directors,nation,plots,runtime,rating,genre,repRlsDate,keywords,posters,stlls,vods,audiAcc
-    for i in range(len(df)):
-        data = (df['title'][i], )
-        datas.append(data)
-
-        Movie.objects.create(df)
 
 
         
