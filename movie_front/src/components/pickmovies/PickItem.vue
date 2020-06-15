@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import PickMovieDetail from '@/components/PickMovieDetail.vue'
+import PickMovieDetail from '@/components/pickmovies/PickMovieDetail.vue'
 
 export default {
   name: 'PickItem',

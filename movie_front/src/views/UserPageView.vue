@@ -8,8 +8,8 @@
 
 <script>
 import axios from 'axios'
-import ArticleCreate from '@/components/ArticleCreate.vue'
-import ArticleList from '@/components/ArticleList.vue'
+import ArticleCreate from '@/components/articles/ArticleCreate.vue'
+import ArticleList from '@/components/articles/ArticleList.vue'
 
 const SERVER_URL = 'http://127.0.0.1:8000/'
 

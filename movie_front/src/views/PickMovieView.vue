@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import PickItem from '@/components/PickItem.vue'
+import PickItem from '@/components/pickmovies/PickItem.vue'
 
 export default {
   name: 'PickMovieView',
