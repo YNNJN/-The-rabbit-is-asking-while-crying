@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>BOARDS</h1>
     <div class="container mt-3">
       <table class="table table-hover ">
         <thead>
