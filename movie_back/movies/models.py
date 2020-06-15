@@ -20,7 +20,11 @@ class Movie(models.Model):
     plotText = models.TextField()
     vodUrl = models.TextField()
 
-class Rate(models.Model):
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    rate = models.IntegerField()
-    rate_man = models.IntegerField()
+# class Rating(models.Model):
+#     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+#     rating_total = models.IntegerField()
+#     rating_man = models.IntegerField()
+#     rating_avg = models.IntegerField()
+    
+#     def rating_avg(self):
+#         rating_avg = self.rating_total / self.rating_man
