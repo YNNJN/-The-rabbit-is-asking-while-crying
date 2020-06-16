@@ -59,6 +59,9 @@ export default {
           this.getArticle()
         })
         .catch(err => console.log(err.response.data))
+        // .then(() =>{
+        //   this.$router.go()
+        // })
     },
     editArticle(article) {
       console.log(article)

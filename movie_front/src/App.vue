@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <router-link class='nav-link pt-5 text-dark' to="/about">About</router-link>
+              <router-link class='nav-link pt-5 text-dark' to="/community">Community</router-link>
             </li>
             <li class="nav-item">
               <router-link class='nav-link pt-5 text-dark' to="/movies/pickmovie">PickMovie</router-link>

@@ -33,7 +33,7 @@ export default {
 <style>
 .movieListItem {
   background-color: #1c1c38;
-  border-radius: 0.5rem;
+  border-radius: 0.8rem;
 }
 
 .card {

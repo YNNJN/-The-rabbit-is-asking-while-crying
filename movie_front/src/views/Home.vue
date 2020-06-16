@@ -102,6 +102,7 @@ export default {
 
 .thirty {
   height: 20rem;
+  width: 20rem;
   background-color: slategrey;
   border-radius: 0.5rem;
   font-size: 1.5rem;
@@ -118,6 +119,7 @@ export default {
 
 .sixty {
   height: 20rem;
+  width: 20rem;
   background-color: seagreen;
   border-radius: 0.5rem;
   font-size: 1.5rem;

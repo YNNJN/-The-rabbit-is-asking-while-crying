@@ -32,7 +32,7 @@ export default {
 .bold {
   color: #d8dcff;
   background-color: #1c1c38;
-  border-radius: 0.2rem;
+  border-radius: 0.5rem;
   width: 44rem;
   margin: auto;
   font-family: 'NeoDunggeunmo';

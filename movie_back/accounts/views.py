@@ -3,13 +3,19 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-
+from .models import User
 from .serializers import UserSerializer
 
 # Create your views here.
 @api_view(['GET'])
 def profile(request, username):
     serializer = UserSerializer(intance=request.user)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def userlist(request):
+    users = User.objects.all()
+    serializer = UserSerializer(instance=users, many=True)
     return Response(serializer.data)
 
 @api_view(['POST'])
