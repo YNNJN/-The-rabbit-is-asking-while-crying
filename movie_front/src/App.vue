@@ -1,43 +1,39 @@
 <template>
   <div id="app" class="back">
-    <v-app>
-      <nav class="navbar navbar-expand-lg sticky-top p-5">
-        <div class="navbar" style="position: absolute; left: 50%; transform: translateX(-50%);">
-          <router-link to="/" class="text-decoration-none pt-5"><strong class="main_title">토끼가 울며 여짜오되</strong></router-link>
-        </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <router-link class='nav-link pt-5 text-dark' to="/about">About</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class='nav-link pt-5 text-dark' to="/movies/pickmovie">PickMovie</router-link>
-            </li>
-          </ul>
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <router-link v-if="!isLoggedIn" class='nav-link pt-5 text-dark' to="/accounts/signup">Signup</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link v-if="!isLoggedIn" class='nav-link pt-5 text-dark' to="/accounts/login">Login</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link v-if="isLoggedIn" class='nav-link pt-5 text-dark' to="/accounts/userpage">Userpage</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link v-if="isLoggedIn" @click.native="logout" class='nav-link pt-5 text-dark' to="/accounts/logout">Logout</router-link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <router-view
-        @login-submit="login"
-        @signup-submit="signup"
-      />
-    </v-app>
+    <nav class="navbar navbar-expand-lg sticky-top p-5">
+      <div class="navbar" style="position: absolute; left: 50%; transform: translateX(-50%);">
+        <router-link to="/" class="text-dark text-decoration-none pt-5"><strong>토끼가 울며 여짜오되</strong></router-link>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <router-link class='nav-link pt-5' to="/movies/pickmovie">PickMovie</router-link>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <router-link v-if="!isLoggedIn" class='nav-link pt-5' to="/accounts/signup">Signup</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link v-if="!isLoggedIn" class='nav-link pt-5' to="/accounts/login">Login</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link v-if="isLoggedIn" class='nav-link pt-5' to="/accounts/userpage">Userpage</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link v-if="isLoggedIn" @click.native="logout" class='nav-link pt-5' to="/accounts/logout">Logout</router-link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <router-view
+      @login-submit="login"
+      @signup-submit="signup"
+    />
   </div>
 </template>
 
@@ -110,30 +106,30 @@ export default {
 
 .back {
   min-height: 100vh;
-  background: #FCFEFF;
+  background: ffffff;
 }
 
 .navbar {
-  background: #FCFEFF;
+  background: ffffff;
 }
 
 .nav-item {
-  color: #1c1c38;
   font-size: 0.9rem;
 }
 
 .nav-link {
-  color: #1c1c38;
+  color: #98f306;
   font-family: 'NeoDunggeunmo';
   font-weight: normal;
   font-style: normal;
 }
 
-.main_title {
-  color: #1c1c38;
+strong {
+  color: #98f306;
   font-size: 1.5rem;
   font-family: 'NeoDunggeunmo';
-  font-weight: bold;
+  font-weight: normal;
   font-style: normal;
 }
 </style>
+

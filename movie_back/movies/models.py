@@ -1,9 +1,5 @@
 from django.db import models
-from django.contrib.auth import get_user_model
 from django.conf import settings
-from django.core.validators import MaxValueValidator, MinValueValidator
-
-User = get_user_model()
 
 # Create your models here.
 class Movie(models.Model):
@@ -23,10 +19,12 @@ class Movie(models.Model):
     plotLang = models.CharField(max_length=20, null=True)
     plotText = models.TextField()
     vodUrl = models.TextField()
-    watched = models.ManyToManyField(User, related_name='watched_movies')
 
-class Review(models.Model):
-    content = models.CharField(max_length=140)
-    score = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)])
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+# class Rating(models.Model):
+#     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+#     rating_total = models.IntegerField()
+#     rating_man = models.IntegerField()
+#     rating_avg = models.IntegerField()
+    
+#     def rating_avg(self):
+#         rating_avg = self.rating_total / self.rating_man

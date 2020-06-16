@@ -185,5 +185,5 @@ LOGIN_REDIRECT_URL ='/movies/'
 CORS_ORIGIN_ALLOW_ALL = True
 
 REST_AUTH_REGISTER_SERIALIZERS = {
-    'REGISTER_SERIALIZER': 'accounts.serializers.UserCreationSerializer'
+    'REGISTER_SERIALIZER': 'accounts.serializers.UserSerializer',
 }
