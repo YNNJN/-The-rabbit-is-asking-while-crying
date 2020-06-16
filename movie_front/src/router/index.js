@@ -6,6 +6,8 @@ import SignupView from '../views/accounts/SignupView.vue'
 import LoginView from '../views/accounts/LoginView.vue'
 import UserPageView from '../views/UserPageView.vue'
 import PickMovieView from '../views/PickMovieView.vue'
+// import ReviewListView from '../views/articles/ReviewListView.vue'
+// import ReviewCreateView from '../views/articles/ReviewCreateView.vue'
 
 Vue.use(VueRouter)
 
@@ -35,6 +37,21 @@ Vue.use(VueRouter)
     name: 'Userpage',
     component: UserPageView
   },
+  // {
+  //   path: '/articles',
+  //   name: 'List',
+  //   component: ReviewListView
+  // },
+  // {
+  //   path: '/articles/create',
+  //   name: 'New',
+  //   component: ReviewCreateView,
+  //   beforeEnter: (to, from, next) => {
+  //     if (!Vue.$cookies.isKey('auth-token')) {
+  //       next({ name: 'Login' })
+  //     } else { next() }
+  //   }
+  // },
   {
     path: '/movies/pickmovie',
     name: 'PickMovie',
