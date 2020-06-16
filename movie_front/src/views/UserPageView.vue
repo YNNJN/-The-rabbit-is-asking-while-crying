@@ -31,7 +31,7 @@ export default {
       required: true,
     },
     article: {
-      type: Array,
+      type: Object,
     },
   },
   methods: {

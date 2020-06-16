@@ -55,9 +55,6 @@ export default {
           console.log(event.target.value)
         })
         .catch(err => console.log(err.response.data))
-        .then(() =>{
-          this.$router.go()
-        })
     },
     editArticle(article) {
       console.log(article)
@@ -69,7 +66,7 @@ export default {
       }
       console.log(this.articleData)
       console.log(this.article)
-      axios.post(SERVER_URL + `articles/${article.id}/update/`, this.articleData, config)
+      axios.put(SERVER_URL + `articles/${this.article.id}/update/`, this.articleData, config)
         .then(res => { 
           console.log(res.data)
           console.log(this._data)
@@ -79,9 +76,6 @@ export default {
           this.$emit('editCreate', this.isCreate)
         })
         .catch(err => console.log(err.response.data))
-        .then(() =>{
-          this.$router.go()
-        })
     },
     check() {
       console.log(this)
