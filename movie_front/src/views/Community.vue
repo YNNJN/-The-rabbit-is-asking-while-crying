@@ -16,8 +16,8 @@
       <div v-for="movie in movies" :key="movie.DOCID" class="col-md-2">
         <div class="card_form card text-center p-2 border-0">
           <p class="card-title text-secondary"> {{ movie.title }}</p>
+          <button @click="watchedMovie(movie.DOCID)" class="badge badge-light">watched</button>
           <img :src="movie.posters" class="card-img-top" :alt="movie.title">
-          <p class="badge badge-light">⏱{{ movie.runtime }}분</p>
         </div>
       </div>
     </div>
@@ -36,7 +36,12 @@ export default {
     }
   },
   methods: {
-
+    watchedMovie(movie.DOCID) {
+      console.log(movie.DOCID)
+      axios.post(MOIVE_API_URL + movie.DOCID + '/watched/')
+      .then(res => console.log(res))
+      .catch(err => console.error(err))
+    }
   },
   created() {
     const movie_list = []
