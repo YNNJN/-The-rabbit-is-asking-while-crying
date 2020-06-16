@@ -13,25 +13,45 @@
         <p class="lead">영감을 얻어요</p>
       </div>
     </div>
-    영화 : {{ movies.title }}
+    <div class="MovieView container">
+      <MovieList :movies="movies"/>
+    </div>
   </div>
 </template>
 
 <script>
-// import axios from 'axios'
+import axios from 'axios'
+import MovieList from '@/components/movies/MovieList.vue'
 
+const MOIVE_API_URL = 'http://127.0.0.1:8000/movies/'
 export default {
   name: 'Home',
+  components: {
+    MovieList,
+  },
   data() {
     return {
       movies: [],
     }
   },
-  methods: {
-
+  props: {
+    Movies: Array,
   },
-  components: {
-    
+  methods: {
+    getMovieData() {
+      axios.get(MOIVE_API_URL)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
+  },
+  created () {
+    axios.get(MOIVE_API_URL)
+    .then(res => this.movies = res.data)
+    .catch(err => console.error(err))
   }
 }
 </script>

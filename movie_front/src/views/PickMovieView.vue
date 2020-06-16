@@ -1,6 +1,6 @@
 <template>
   <div class="p-5">
-    <h1>Pick Movie</h1>
+    <h1 class="mb-5">Pick Movie</h1>
     <div class="container">       
         <PickItem/>
     </div>
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import PickItem from '@/components/PickItem.vue'
+import PickItem from '@/components/pickmovies/PickItem.vue'
 
 export default {
   name: 'PickMovieView',
