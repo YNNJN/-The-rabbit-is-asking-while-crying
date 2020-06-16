@@ -45,7 +45,7 @@ def comment_create(request, article_pk):
         serializer.save(user=request.user, article=article)
         return Response(serializer.data)
 
-@api_view(['POST'])
+@api_view(['PUT'])
 @permission_classes([IsAuthenticated])
 def update(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)

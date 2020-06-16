@@ -40,6 +40,9 @@ export default {
     isCreate: null,
   },
   methods: {
+    getArticle() {
+      this.$emit('getArticle', this.isCreate)
+    },
     createArticle() {
       const config = {
         headers: {
@@ -53,6 +56,7 @@ export default {
           this._data.articleData.title=''
           this._data.articleData.content=''
           console.log(event.target.value)
+          this.getArticle()
         })
         .catch(err => console.log(err.response.data))
         // .then(() =>{

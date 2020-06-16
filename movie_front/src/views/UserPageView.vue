@@ -1,7 +1,7 @@
 <template>
   <div class="p-5">
     <h1 class="mb-5 text-center">user page</h1>
-    <ArticleList :articles="articles" :isCreate="isCreate" @editData="onEdit"/>
+    <ArticleList :articles="articles" :isCreate="isCreate" @getArticle="getArticle()" @editData="onEdit"/>
     <ArticleCreate :article="article" :isCreate="isCreate" @editCreate="editCreate"/>
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
     //   required: true,
     // },
     article: {
-      type: Array,
+      type: Object,
     },
   },
   methods: {
@@ -39,6 +39,9 @@ export default {
       axios.get(SERVER_URL + "articles/")
         .then(res => this.articles = res.data)
         .catch(err => console.error(err))
+    },
+    getArticle() {
+      this.fetchArticles()
     },
     onEdit(article) {
       this.article = article

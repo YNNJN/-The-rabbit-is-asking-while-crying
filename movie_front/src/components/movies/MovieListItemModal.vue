@@ -1,6 +1,6 @@
 <template>
   <div class="movieListItemModal">    
-    <div class="modal fade" :id="'movie'+movie.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" :id="'movie'+movie.DOCID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -17,6 +17,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" @click="onClick">Check</button>
           </div>
         </div>
       </div>
@@ -35,6 +36,11 @@ export default {
     posterURL() {
       return this.movie.posters
     }
+  },
+  methods: {
+    onClick() {
+      console.log(this)
+    },
   },
 }
 </script>

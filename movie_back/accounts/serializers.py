@@ -27,7 +27,7 @@ class UserCreationSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    watched_set = MovieSerializer(many=True)
+    # watched_set = MovieSerializer(many=True)
     class Meta:
         model = User
-        fields = ('id', 'username', 'followers', 'age', 'watched_set', )
+        fields = ('id', 'username', 'followers', 'age', ) # , 'watched_set'은 오류 해결을 위해 잠깐 제거

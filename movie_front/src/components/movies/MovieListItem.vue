@@ -5,7 +5,7 @@
       <img :src="posterURL" class="card-img-top" :alt="movie.title">
       <p class="badge badge-light">⏱{{ movie.runtime }}분</p>
       <div class="card-body">
-        <button class="detail_button btn btn-secondary" data-toggle="modal" :data-target="'#movie'+movie.id">자세히보기</button>
+        <button class="detail_button btn btn-secondary" data-toggle="modal" :data-target="'#movie'+movie.DOCID">자세히보기</button>
       </div>
     </div>
     <MovieListItemModal :movie="movie"/>
@@ -17,7 +17,7 @@ import MovieListItemModal from './MovieListItemModal.vue'
 export default {
   name: 'MovieListItem',
   components: {
-    MovieListItemModal
+    MovieListItemModal,
   },
   props: {
     movie: Object,
