@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from movies.serializers import MovieSerializer
 from .models import User
 
 class UserCreationSerializer(serializers.ModelSerializer):
@@ -7,7 +8,6 @@ class UserCreationSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'age', 'password', 'password2',)
-    
     def save(self, request):
         user = User(
             username = self.validated_data['username']
@@ -27,4 +27,4 @@ class UserSerializer(serializers.ModelSerializer):
    
     class Meta:
         model = User
-        fields = ('id', 'username', 'age', 'password',)
+        fields = ('id', 'username', 'followers', 'age', 'watched_set', )
