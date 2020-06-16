@@ -9,13 +9,18 @@
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">PASSWORD</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" v-model="signupInfo.password1">
+        <input type="password" class="form-control" id="exampleInputPassword1" v-model="signupInfo.password">
         <small id="passwordHelp" class="form-text text-muted">The password must contain at least 8 characters and at least one special character. (e.g `, ~, !, @)</small>
       </div>
       <div class="form-group">
         <label for="exampleInputPassword2">PASSWORD CONFIRMATION</label>
         <input type="password" class="form-control" id="exampleInputPassword2" v-model="signupInfo.password2">
         <small id="passwordHelp" class="form-text text-muted">Please enter your password again.</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputAge">AGE</label>
+        <input type="number" class="form-control" id="exampleInputAge" v-model="signupInfo.age">
+        <small id="ageHelp" class="form-text text-muted">Please enter your age.</small>
       </div>
       <div class="form-group form-check">
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -33,8 +38,9 @@ export default {
     return {
       signupInfo: {
         username: '',
-        password1: '',
+        password: '',
         password2: '',
+        age: null,
       },
     }
   },

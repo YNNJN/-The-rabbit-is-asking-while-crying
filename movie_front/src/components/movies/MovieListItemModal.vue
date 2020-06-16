@@ -12,7 +12,7 @@
           <div class="modal-body">
             <img :src="posterURL" class="img-fluid" alt='backdrop'>
             <hr>
-            <p class="badge badge-light d-flex justify-content-center mb-3 p-2"> ⭐️</p>
+            <p class="badge badge-light d-flex justify-content-center mb-3 p-2">{{ movie.genre }}, {{ movie.rating }}</p>
             <p>{{ movie.plotText }}</p>
           </div>
           <div class="modal-footer">
