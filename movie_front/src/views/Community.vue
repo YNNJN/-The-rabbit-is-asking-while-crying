@@ -16,8 +16,27 @@
       <div v-for="movie in movies" :key="movie.DOCID" class="col-md-2">
         <div class="card_form card text-center p-2 border-0">
           <p class="card-title text-secondary"> {{ movie.title }}</p>
-          <button @click="watchedMovie(movie.DOCID)" class="badge badge-light">watched</button>
+          <button @click="watchedMovie(movie)" class="badge badge-light">watched</button>
           <img :src="movie.posters" class="card-img-top" :alt="movie.title">
+          <button class="button btn btn-warning" data-toggle="modal" :data-target="'#scoremovie'+movie.DOCID">이상하고 아름다운 도깨비나라</button>
+        </div>
+        <div class="modal fade" :id="'scoremovie'+movie.DOCID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{ movie.title }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>하...</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -37,8 +56,12 @@ export default {
   },
   methods: {
     watchedMovie(movie) {
-      console.log(movie.DOCID)
-      axios.post(MOIVE_API_URL + movie.DOCID + '/watched/')
+      const config = {
+        headers: {
+          Authorization: `Token ${this.$cookies.get('auth-token')}`
+        },
+      }
+      axios.post(MOIVE_API_URL + `${movie.DOCID}/watched/`, movie, config)
       .then(res => console.log(res))
       .catch(err => console.error(err))
     }
