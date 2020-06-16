@@ -132,7 +132,7 @@ export default {
         })
         .catch(err => console.log(err))
         .then(() =>{
-          this.$router.go()
+          // this.$router.go()
         })
     },
   },

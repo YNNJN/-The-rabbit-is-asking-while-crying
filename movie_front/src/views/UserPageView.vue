@@ -26,10 +26,10 @@ export default {
     }
   },
   props: {
-    follower: {
-      type: Object,
-      required: true,
-    },
+    // follower: {
+    //   type: Object,
+    //   required: true,
+    // },
     article: {
       type: Array,
     },
