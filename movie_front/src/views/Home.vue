@@ -3,30 +3,34 @@
     <div class="p-5">
       <div class="d-flex justify-content-center">
         <div class="thirty text-center m-2">
-          <button type="button" class="btn text-dark" data-toggle="modal" data-target="#minuteModal">
+          <div @click="get30data()" type="button" class="btn text-dark" data-toggle="modal" data-target="#minuteModal">
             <p style="font-size:2.5rem">30 min</p>
             <img class="rabbit_icon" src="@/assets/rabbit_sleeping.png">
-          </button>
+          </div>
         </div>
         <div class="sixty text-center m-2">
-          <button type="button" class="btn text-dark" data-toggle="modal" data-target="#hourModal">
+          <div @click="get60data()" type="button" class="btn text-dark" data-toggle="modal" data-target="#hourModal">
             <p style="font-size:2.5rem">60 min</p>
             <img class="turtle_icon" src="@/assets/turtle.png">
-          </button>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- modal -->
     <div class="modal fade" id="minuteModal" tabindex="-1" role="dialog" aria-labelledby="minuteModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="minuteModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="minuteModalLabel">30분 분량의 영화를 만나보세요</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <PickMovieDetail/>
+            <div v-for=" movie in movie_thirty" :key="movie.DOCID">
+              {{ movie.title }}
+            </div>
           </div>
         </div>
       </div>
@@ -35,13 +39,15 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="hourModalLabel">Am Modal title</h5>
+            <h5 class="modal-title" id="hourModalLabel">60분 분량의 영화를 만나보세요</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <PickMovieDetail/>
+            <div v-for=" movie in movie_sixty" :key="movie.DOCID">
+              {{ movie.title }}
+            </div>
           </div>
         </div>
       </div>
@@ -68,10 +74,14 @@ export default {
   components: {
     MovieList,
   },
+
   data() {
     return {
       movies: [],
+      movielist: [],
       showButton: true,
+      movie_sixty: [],
+      movie_thirty: [],
     }
   },
   methods: {
@@ -84,8 +94,35 @@ export default {
       .catch(err => {
         console.log(err)
       })
-    }
+    },
+    get30data() {
+      axios.get(MOIVE_API_URL)
+      .then(res => {
+        this.movielist = res.data
+        this.movielist.forEach(temp_movie => {
+          if (temp_movie.runtime === 30) {
+            return this.movie_thirty.push(temp_movie)
+          }
+        })
+      })
+    },
+    get60data() {
+      axios.get(MOIVE_API_URL)
+      .then(res => {
+        this.movielist = res.data
+        this.movielist.forEach(temp_movie => {
+          if (temp_movie.runtime === 60) {
+            return this.movie_sixty.push(temp_movie)
+          }
+        })
+      })
+    },
   },
+
+  // this.movies.forEach(temp_movie => {
+  //   if (temp_movie.runtime === 30) {
+  //     console.log('sss')
+
   // created () {
   //   axios.get(MOIVE_API_URL)
   //   .then(res => this.movies = res.data)
