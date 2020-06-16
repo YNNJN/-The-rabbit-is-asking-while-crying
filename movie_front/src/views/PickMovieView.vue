@@ -1,6 +1,7 @@
 <template>
   <div class="p-5">
     <h1 class="bold mb-5 text-center">Pick Movie</h1>
+    <p class="lead text-center">원하는 러닝타임을 선택하세요</p>
     <div class="container">       
       <PickItem :movies="movies"/>
     </div>

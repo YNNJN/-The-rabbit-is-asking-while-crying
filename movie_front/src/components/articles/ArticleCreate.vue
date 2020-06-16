@@ -1,19 +1,22 @@
 <template>
   <div>
     <div class="container text-left">
-      <div class="form-group">
-        <label for="exampleInputTitle">Title</label>
-        <input type="text" class="form-control" id="exampleInputTitle" aria-describedby="titleHelp" v-model="articleData.title">
-        <small id="titleHelp" class="form-text text-muted">Please leave an opinion about the movie.</small>
+      <div class="p-5 mx-5">
+        <div class="form-group">
+          <label for="exampleInputTitle">Title</label>
+          <input type="text" class="form-control" id="exampleInputTitle" aria-describedby="titleHelp" v-model="articleData.title">
+          <small id="titleHelp" class="form-text text-muted">Please leave an opinion about the movie.</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputContent">CONTENT</label>
+          <textarea class="form-control" id="exampleInputContent" v-model="articleData.content" row="10"></textarea>
+        </div>
+        <div class="button_group">
+          <button v-if="isCreate" type="submit" class="btn btn-success text-white" @click="createArticle"><strong>Create</strong></button>
+          <button v-if="!isCreate" type="submit" class="btn btn-warning" @click="editArticle"><strong>Edit</strong></button>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="exampleInputContent">CONTENT</label>
-        <input type="text" class="form-control" id="exampleInputContent" v-model="articleData.content" row="30">
-      </div>
-      <button v-if="isCreate" type="submit" class="btn btn-success" @click="createArticle">Create</button>
-      <button v-if="!isCreate" type="submit" class="btn btn-warning" @click="editArticle">Edit</button>
     </div>
-     <button type="submit" class="btn btn-white" @click="check">check</button>
   </div>
 </template>
 
@@ -71,8 +74,6 @@ export default {
           Authorization: `Token ${this.$cookies.get('auth-token')}`
         },
       }
-      console.log(this.articleData)
-      console.log(this.article)
       axios.post(SERVER_URL + `articles/${article.id}/update/`, this.articleData, config)
         .then(res => { 
           console.log(res.data)
@@ -108,6 +109,15 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.form-group {
+  width: 44rem;
+  margin: auto;
+}
+
+.button_group {
+  margin-left: 10rem;
+  margin-top: 1rem;
+}
 
 </style>
