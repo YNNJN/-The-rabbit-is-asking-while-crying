@@ -55,9 +55,9 @@ export default {
           console.log(event.target.value)
         })
         .catch(err => console.log(err.response.data))
-        .then(() =>{
-          this.$router.go()
-        })
+        // .then(() =>{
+        //   this.$router.go()
+        // })
     },
     editArticle(article) {
       console.log(article)
