@@ -36,7 +36,7 @@ export default {
     }
   },
   methods: {
-    watchedMovie(movie.DOCID) {
+    watchedMovie(movie) {
       console.log(movie.DOCID)
       axios.post(MOIVE_API_URL + movie.DOCID + '/watched/')
       .then(res => console.log(res))
