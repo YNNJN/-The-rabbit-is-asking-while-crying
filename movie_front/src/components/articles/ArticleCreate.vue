@@ -40,6 +40,9 @@ export default {
     isCreate: null,
   },
   methods: {
+    getArticle() {
+      this.$emit('getArticle', this.isCreate)
+    },
     createArticle() {
       const config = {
         headers: {
@@ -53,6 +56,7 @@ export default {
           this._data.articleData.title=''
           this._data.articleData.content=''
           console.log(event.target.value)
+          this.getArticle()
         })
         .catch(err => console.log(err.response.data))
     },
@@ -66,7 +70,7 @@ export default {
       }
       console.log(this.articleData)
       console.log(this.article)
-      axios.put(SERVER_URL + `articles/${this.article.id}/update/`, this.articleData, config)
+      axios.post(SERVER_URL + `articles/${article.id}/update/`, this.articleData, config)
         .then(res => { 
           console.log(res.data)
           console.log(this._data)
@@ -76,6 +80,9 @@ export default {
           this.$emit('editCreate', this.isCreate)
         })
         .catch(err => console.log(err.response.data))
+        .then(() =>{
+          this.$router.go()
+        })
     },
     check() {
       console.log(this)
