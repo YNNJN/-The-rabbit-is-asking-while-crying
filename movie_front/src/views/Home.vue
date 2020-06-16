@@ -80,7 +80,6 @@ export default {
       axios.get(MOIVE_API_URL)
       .then(res => {
         this.movies = res.data
-        console.log(this.movies)
       })
       .catch(err => {
         console.log(err)

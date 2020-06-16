@@ -5,7 +5,7 @@
       <MovieListItem
         :movie="movie"
         v-for="movie in movies.slice(0,8)"
-        :key="movie.id"
+        :key="movie.DOCID"
       />
     </div>
   </div>
