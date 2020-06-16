@@ -1,6 +1,6 @@
 <template>
   <div class="movieListItem col-sm-12 col-md-3">
-    <div class="card text-center p-2">
+    <div class="card text-center p-2 border-0">
       <p class="card-title text-secondary"> {{ movie.title }}</p>
       <img :src="posterURL" class="card-img-top" :alt="movie.title">
       <p class="badge badge-light">⏱{{ movie.runtime }}분</p>
@@ -33,6 +33,7 @@ export default {
 <style>
 .movieListItem {
   background-color: #1c1c38;
+  border-radius: 0.5rem;
 }
 
 .card {
