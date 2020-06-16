@@ -1,5 +1,9 @@
 <template>
   <div class="container">
+    <div class="stage">
+      <div class="character turtle"><img src="@/assets/turtle.png" width="80%"></div>
+      <div class="character rabbit_walking"><img src="@/assets/rabbit_walking.png" width="75%"></div>
+    </div>
     <div class="p-5">
       <v-card>
         <v-card-text>
@@ -71,4 +75,43 @@ export default {
   background-color: #d8dcff;
   border-radius: 0.8rem;
 }
+
+.stage {
+  position: relative;
+  width: 80vw;
+  height: 4vh;
+}
+
+@keyframes moving {
+  from {
+    transform: translateX(90vw);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.character {
+position: absolute;
+  width: 150px;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  animation: moving infinite alternate;
+}
+
+.character.turtle {
+  left: 5%;
+  bottom: 35%;
+  animation-duration: 25s;
+  z-index: 1;
+}
+
+.character.rabbit_walking {
+  left: 10%;
+  bottom: 10%;
+  animation-duration: 7s;
+}
+
 </style>
