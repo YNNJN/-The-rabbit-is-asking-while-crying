@@ -17,7 +17,7 @@ def detail(request, movie_id):
     serializer = MovieSerializer(movie)
     return Response(serializer.data)
 
-@api_view(['GET'])
+@api_view(['POST'])
 def watched(request, movie_id):
     movie = get_object_or_404(Movie, pk=movie_id)
     user = request.user
