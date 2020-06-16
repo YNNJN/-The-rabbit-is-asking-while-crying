@@ -16,6 +16,38 @@
         </div>
       </div>
     </div>
+<div class="modal fade" id="minuteModal" tabindex="-1" role="dialog" aria-labelledby="minuteModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="minuteModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <PickMovieDetail/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="hourModal" tabindex="-1" role="dialog" aria-labelledby="hourModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="hourModalLabel">Am Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <PickMovieDetail/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <div class="p-3">
       <p class="lead text-center mt-5">가장 빠른 영화를 이곳에서 만나세요 !</p>
       <button v-if="showButton" @click="getMovieData" class="start_button btn"><strong>start</strong></button>

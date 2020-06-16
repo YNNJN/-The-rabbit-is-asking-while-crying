@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="bold mb-4 text-center">Movie List</h1>
+    <h1 class="bold mb-5 text-center">Movie List</h1>
     <div class="movieList row">
       <MovieListItem
         :movie="movie"
@@ -32,6 +32,7 @@ export default {
 .bold {
   color: #d8dcff;
   background-color: #1c1c38;
+  border-radius: 0.2rem;
   width: 44rem;
   margin: auto;
   font-family: 'NeoDunggeunmo';
