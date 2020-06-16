@@ -7,7 +7,7 @@ from .serializers import MovieSerializer
 # Create your views here.
 @api_view(['GET'])
 def index(request):
-    movies = Movie.objects.all()
+    movies = Movie.objects.order_by('runtime')
     serializer = MovieSerializer(instance=movies, many=True)
     return Response(serializer.data)
 
