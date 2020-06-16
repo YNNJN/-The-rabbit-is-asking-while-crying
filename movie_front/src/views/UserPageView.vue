@@ -47,6 +47,9 @@ export default {
     editCreate(isCreate) {
       this.isCreate = isCreate
     },
+    getMyinfo() {
+
+    },
   },
   created() {
     this.fetchArticles()

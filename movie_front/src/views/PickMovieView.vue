@@ -1,6 +1,6 @@
 <template>
   <div class="p-5">
-    <h1 class="mb-5">Pick Movie</h1>
+    <h1 class="bold mb-5 text-center">Pick Movie</h1>
     <div class="container">       
       <PickItem :movies="movies"/>
     </div>
