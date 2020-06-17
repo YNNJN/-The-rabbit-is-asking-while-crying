@@ -14,6 +14,7 @@
         <i class="fas fa-cog mx-2"></i>
       </div>
     </div>
+    <WatchedMovie :user_info="user_info"/>
     <!-- 유저 목록, follow를 위해 버튼 클릭 -->
     <p class="playlist_text text-center mt-5">다른 유저의 플레이리스트를 만나보세요 👉</p>
     <div class="d-flex justify-content-center">
@@ -33,6 +34,7 @@
 import axios from 'axios'
 import ArticleCreate from '@/components/articles/ArticleCreate.vue'
 import ArticleList from '@/components/articles/ArticleList.vue'
+import WatchedMovie from '@/components/WatchedMovie.vue'
 
 const SERVER_URL = 'http://127.0.0.1:8000/'
 const USER_API_URL = 'http://127.0.0.1:8000/accounts/user_info/'
@@ -42,6 +44,7 @@ export default {
   components: {
     ArticleCreate,
     ArticleList,
+    WatchedMovie,
   },
   data() {
     return {

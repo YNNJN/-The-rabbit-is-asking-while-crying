@@ -49,3 +49,9 @@ def review_delete(request, movie_id):
     review.delete()
     serializer = ReviewSerializer(review)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def pick_index(request):
+    movies = Movie.objects.filter(watched=request.user).order_by('runtime')
+    serializer = MovieSerializer(instance=movies, many=True)
+    return Response(serializer.data)
