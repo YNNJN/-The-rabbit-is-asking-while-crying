@@ -19,7 +19,7 @@ class UserCreationSerializer(serializers.ModelSerializer):
         age = self.validated_data['age']
 
         if password != password2:
-            raise serializers.ValidationError(_("The two password fields didn't match."))
+            raise serializers.ValidationError(("The two password fields didn't match."))
         user.set_password(password)
         user.age = age
         user.save()

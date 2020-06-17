@@ -15,7 +15,8 @@
       <div v-for="movie in movies" :key="movie.DOCID" class="col-md-2">
         <div class="card_form card text-center p-2 border-0">
           <p class="card-title text-secondary"> {{ movie.title }}</p>
-          <button @click="watchedMovie(movie)" class="badge badge-light" data-toggle="modal" :data-target="'#scoremovie'+movie.DOCID">watched</button>
+          <button v-if="!isWatched(movie)" @click="watchedMovie(movie)" class="badge badge-light" data-toggle="modal" :data-target="'#scoremovie'+movie.DOCID">watched</button>
+          <button v-if="isWatched(movie)" @click="watchedMovie(movie)" class="badge badge-light">watched</button>
           <img :src="movie.posters" class="card-img-top" :alt="movie.title">
         </div>
         <div class="modal fade" :id="'scoremovie'+movie.DOCID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -36,7 +37,7 @@
                   <label for="InputContent">CONTENT</label>
                   <input type="text" class="form-control" id="InputContent" v-model="reviewData.content" row="30">
                 </div>
-                <button type="submit" class="btn btn-success" @click="createReview">Create</button>
+                <button type="submit" class="btn btn-success" @click="createReview(movie)">Create</button>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -53,7 +54,7 @@
 import axios from 'axios'
 
 const MOIVE_API_URL = 'http://127.0.0.1:8000/movies/'
-const USER_API_URL = 'http://127.0.0.1:8000/accounts/get/'
+const USER_API_URL = 'http://127.0.0.1:8000/accounts/user_info/'
 
 export default {
   name: 'Community',
@@ -64,7 +65,15 @@ export default {
         score: null,
         content: '',
       },
+      user: Object,
     }
+  },
+  computed: {
+    isWatched(movie) {
+      return movie.watched.some(temp_watched => {
+        temp_watched == this.user.id
+      })    
+    },
   },
   methods: {
     watchedMovie(movie) {
@@ -73,13 +82,24 @@ export default {
           Authorization: `Token ${this.$cookies.get('auth-token')}`
         },
       }
-      console.log(config)
+      console.log(movie)
       axios.post(MOIVE_API_URL + `${movie.DOCID}/watched/`, movie, config)
       .then(res => console.log(res))
       .catch(err => console.error(err))
     },
-    createReview() {
-      console.log(this)
+    createReview(movie) {
+      const config = {
+        headers: {
+          Authorization: `Token ${this.$cookies.get('auth-token')}`
+        },
+      }
+      axios.post(MOIVE_API_URL + `${movie.DOCID}/review_create/`, this.reviewData, config)
+        .then(res => {
+          console.log(res) 
+          this._data.reviewData.score=''
+          this._data.reviewData.content=''
+        })
+        .catch(err => console.log(err.response.data))
     },
   },
   created() {
@@ -101,9 +121,13 @@ export default {
         Authorization: `Token ${this.$cookies.get('auth-token')}`
       },
     }
-    axios.get(USER_API_URL, {}, config)
-    .then(res => console.log(res))
+    axios.get(USER_API_URL, config)
+    .then(res => {
+      this.user = res.data
+      console.log(this.user)
+    })
     .catch(err => console.log(err))
+    console.log(this)
   }
 }
 </script>
