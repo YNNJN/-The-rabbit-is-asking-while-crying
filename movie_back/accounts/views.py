@@ -37,7 +37,12 @@ def follow(request, username):
     serializer = UserSerializer(instance=request.user)
     return Response(serializer.data)
 
-def get(request):
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def user_info(request):
     user = request.user
+    print(user)
+    # from django.http import HttpResponse
+    # return HttpResponse('ok')
     serializer = UserSerializer(user)
     return Response(serializer.data)

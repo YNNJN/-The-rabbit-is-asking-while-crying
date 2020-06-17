@@ -53,7 +53,7 @@
 import axios from 'axios'
 
 const MOIVE_API_URL = 'http://127.0.0.1:8000/movies/'
-const USER_API_URL = 'http://127.0.0.1:8000/accounts/get/'
+const USER_API_URL = 'http://127.0.0.1:8000/accounts/user_info/'
 
 export default {
   name: 'Community',
@@ -101,7 +101,7 @@ export default {
         Authorization: `Token ${this.$cookies.get('auth-token')}`
       },
     }
-    axios.get(USER_API_URL, {}, config)
+    axios.get(USER_API_URL, config)
     .then(res => console.log(res))
     .catch(err => console.log(err))
   }
