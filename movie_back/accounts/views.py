@@ -8,8 +8,15 @@ from .serializers import UserSerializer
 
 # Create your views here.
 @api_view(['GET'])
+def index(request):
+    users = User.objects.all()
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
 def profile(request, username):
-    serializer = UserSerializer(intance=request.user)
+    user = get_object_or_404(User, username=username)
+    serializer = UserSerializer(intance=user)
     return Response(serializer.data)
 
 @api_view(['GET'])
@@ -19,7 +26,7 @@ def userlist(request):
     return Response(serializer.data)
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def follow(request, username):
     person = get_object_or_404(User, username=username)
     user = request.user
@@ -27,7 +34,7 @@ def follow(request, username):
         person.followers.remove(user)
     else:
         person.followers.add(user)
-    serializer = UserSerializer(instance=user)
+    serializer = UserSerializer(instance=request.user)
     return Response(serializer.data)
 
 def get(request):
