@@ -4,7 +4,7 @@
       <h1 class="page_title mb-5 text-center">User Page</h1>
       <p class="lead text-center">나의 플레이리스트를 설명해주세요</p>
     </div>
-    <div class="jumbotron text-center p-3">
+    <div class="jumbotron text-center p-3 mb-5">
       <div class="d-inline">
         <img src="@/assets/anonymous.png" class="rounded-circle d-inine mr-5" widtn="90" height="90">
       </div>
@@ -15,12 +15,18 @@
       </div>
     </div>
     <WatchedMovie :user_info="user_info"/>
-    <!-- 유저 목록, follow를 위해 버튼 클릭 -->
-    <p class="playlist_text text-center mt-5">다른 유저의 플레이리스트를 만나보세요 👉</p>
+    <div class="quote_box" width="44rem">
+      <i class="fas fa-quote-left fa-2x float-left"></i>
+      <i class="fas fa-quote-right fa-2x float-right"></i>
+    </div>
+    <p class="playlist_text text-center">다른 유저의 플레이리스트를 만나보세요 👉</p>
     <div class="d-flex justify-content-center">
       <span v-for="user in users" :key="user.username">
         <a @click="follow(user)" class="badge badge-pill badge-light mx-3 text-decoration-none text-reset">{{ user.username }}</a>
       </span>
+    </div>
+    <div class="write">
+      저는 공룡을 좋아해여. 그래서 "지구공룡대탐험"처럼 공룡 나오는 걸 많이 봤어요. 공룡이 사는 도시가 궁금해요. "천 개 행성의 도시"에서 본 그런 도시에 공룡이 살았을까요? 공룡 좋아하시는 분들 저를 팔로우 해주세요.
     </div>
 
     <ArticleCreate :article="article" :isCreate="isCreate" @editCreate="editCreate"/>
@@ -160,6 +166,14 @@ export default {
   width: 44rem;
 }
 
+.quote_box {
+  width: 44rem;
+  margin: auto;
+  margin-top: 3rem;
+  color: paleturquoise;
+  opacity: 0.3;
+}
+
 .follow_text {
   margin-left: 6rem;
   margin-top: 0;
@@ -171,10 +185,19 @@ export default {
 
 .playlist_text {
   color: #5d4c5f;
-  padding-top: 4rem;
+  padding-top: 1rem;
   font-size: 1.1rem;
   font-family: 'NeoDunggeunmo';
   font-weight: normal;
   font-style: normal;
+}
+
+.write {
+  width: 44rem;
+  padding: 1rem;
+  margin: auto;
+  margin-top: 4rem;
+  font-size: 1.1rem;
+  color: slategray;
 }
 </style>

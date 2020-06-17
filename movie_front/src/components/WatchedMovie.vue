@@ -1,19 +1,7 @@
 <template>
-  <div class="container text-center">
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner w-50">
-            <div v-for="movie in movies" :key="movie.DOCID" class="carousel-item active">
-                <img :src="movie.posters" class="d-block w-100" :alt="movie.title">
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+  <div class="watched_container">
+    <div v-for="movie in movies" :key="movie.DOCID">
+      <a class="watched_item text-decoration-none text-reset">{{ movie.title }}</a>
     </div>
   </div>
 </template>
@@ -61,5 +49,23 @@ export default {
 </script>
 
 <style scoped>
+.watched_container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 44rem;
+  margin: auto;
+}
+
+.watched_item {
+  background-color: paleturquoise;
+  border-radius: 0.5rem;
+  padding: 0.2rem;
+  margin: 0.3rem;
+  font-size: 0.9rem;
+  font-family: 'NeoDunggeunmo';
+  font-weight: normal;
+  font-style: normal;
+}
 
 </style>
