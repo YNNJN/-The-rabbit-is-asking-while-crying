@@ -5,7 +5,7 @@ from .models import User
 
 class UserCreationSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(write_only=True)
-    age = serializers.IntegerField()
+    age = serializers.IntegerField(default=1)
     class Meta:
         model = User
         fields = ('id', 'username', 'age', 'password', 'password2',)
@@ -19,7 +19,7 @@ class UserCreationSerializer(serializers.ModelSerializer):
         age = self.validated_data['age']
 
         if password != password2:
-            raise serializers.ValidationError(_("The two password fields didn't match."))
+            raise serializers.ValidationError(("The two password fields didn't match."))
         user.set_password(password)
         user.age = age
         user.save()
