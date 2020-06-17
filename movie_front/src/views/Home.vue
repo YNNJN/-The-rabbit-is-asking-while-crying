@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <span class="slogan">마감에 쫓기는 완벽주의자를 위한 영화와 함께 쉬어가기 프로젝트</span>
     <div class="p-5">
       <div class="d-flex justify-content-center">
         <div class="thirty text-center m-2">
@@ -58,7 +59,7 @@
       <p class="lead text-center mt-5">가장 빠른 영화를 이곳에서 만나세요 !</p>
       <button v-if="showButton" @click="getMovieData" class="start_button btn"><strong>start</strong></button>
     </div>
-    <div class="list_up container mt-5 p-0">
+    <div class="container mt-5 p-0">
       <MovieList :movies="movies"/>
     </div>
   </div>
@@ -118,19 +119,21 @@ export default {
       })
     },
   },
-
-  // this.movies.forEach(temp_movie => {
-  //   if (temp_movie.runtime === 30) {
-  //     console.log('sss')
-
-  // created () {
-  //   axios.get(MOIVE_API_URL)
-  //   .then(res => this.movies = res.data)
-  //   .catch(err => console.error(err))
-  // }
 }
 </script>
 <style>
+.home {
+  text-align: center;
+}
+
+.slogan {
+  color: #5d4c5f;
+  background-color: paleturquoise;
+  font-family: 'NeoDunggeunmo';
+  font-weight: normal;
+  font-style: normal;
+}
+
 .lead {
   font-family: 'NeoDunggeunmo';
   font-weight: normal;

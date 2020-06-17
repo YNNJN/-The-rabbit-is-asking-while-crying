@@ -10,17 +10,19 @@
           <v-slider @mousedown="onPoint(value)" v-model="value" label="How long?" :min="0" :max="140" append-icon="alarm" thumb-label ticks></v-slider>
         </v-card-text>
       </v-card>
-      <div class="row p-3" v-if="show_on == true">
-        <div v-for="ele in movie" :key="ele.DOCID" class="col-md-3">
-          <div class="card_form card text-center p-2 border-0">
-            <p class="card-title text-secondary"> {{ ele.title }}</p>
-            <img :src="ele.posters" class="card-img-top" :alt="ele.title">
-            <p class="badge badge-light">⏱{{ ele.runtime }}분</p>
-            <div class="card-body">
-              <button class="detail_button btn btn-secondary" data-toggle="modal" :data-target="'#movie'+ele.DOCID">자세히보기</button>
+      <div class="container mt-5 p-0">
+        <div class="row p-0 m-0" v-if="show_on == true">
+          <div v-for="ele in movie" :key="ele.DOCID" class="col-md-3 p-0">
+            <div class="card_form card text-center p-2 border-0">
+              <p class="card-title text-secondary"> {{ ele.title }}</p>
+              <img :src="ele.posters" class="card-img-top" :alt="ele.title">
+              <p class="badge badge-light">⏱{{ ele.runtime }}분</p>
+              <div class="card-body">
+                <button class="detail_button btn btn-secondary" data-toggle="modal" :data-target="'#movie'+ele.DOCID">자세히보기</button>
+              </div>
             </div>
+            <PickMovieDetail :ele="ele"/>
           </div>
-          <PickMovieDetail :ele="ele"/>
         </div>
       </div>
     </div>
@@ -69,6 +71,7 @@ export default {
 <style scoped>
 .card {
   background-color: #d8dcff;
+  border-radius: 0.8rem;
 }
 
 .PickMovieDetail {
