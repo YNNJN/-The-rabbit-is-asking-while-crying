@@ -4,5 +4,5 @@ from django.conf import settings
 
 # Create your models here.
 class User(AbstractUser):
-    age = models.IntegerField()
+    age = models.IntegerField(default=1)
     followers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="followings")

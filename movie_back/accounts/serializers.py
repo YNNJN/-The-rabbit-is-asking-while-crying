@@ -5,7 +5,7 @@ from .models import User
 
 class UserCreationSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(write_only=True)
-    age = serializers.IntegerField()
+    age = serializers.IntegerField(default=1)
     class Meta:
         model = User
         fields = ('id', 'username', 'age', 'password', 'password2',)

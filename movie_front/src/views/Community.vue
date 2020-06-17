@@ -15,9 +15,8 @@
       <div v-for="movie in movies" :key="movie.DOCID" class="col-md-2">
         <div class="card_form card text-center p-2 border-0">
           <p class="card-title text-secondary"> {{ movie.title }}</p>
-          <button @click="watchedMovie(movie)" class="badge badge-light">watched</button>
+          <button @click="watchedMovie(movie)" class="badge badge-light" data-toggle="modal" :data-target="'#scoremovie'+movie.DOCID">watched</button>
           <img :src="movie.posters" class="card-img-top" :alt="movie.title">
-          <button class="button btn btn-warning" data-toggle="modal" :data-target="'#scoremovie'+movie.DOCID">이상하고 아름다운 도깨비나라</button>
         </div>
         <div class="modal fade" :id="'scoremovie'+movie.DOCID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -29,7 +28,15 @@
                 </button>
               </div>
               <div class="modal-body">
-                <p>하...</p>
+                <div class="form-group">
+                  <label for="InputScore">Score</label>
+                  <input type="text" class="form-control" id="InputScore" v-model="reviewData.score">
+                </div>
+                <div class="form-group">
+                  <label for="InputContent">CONTENT</label>
+                  <input type="text" class="form-control" id="InputContent" v-model="reviewData.content" row="30">
+                </div>
+                <button type="submit" class="btn btn-success" @click="createReview">Create</button>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -46,11 +53,17 @@
 import axios from 'axios'
 
 const MOIVE_API_URL = 'http://127.0.0.1:8000/movies/'
+const USER_API_URL = 'http://127.0.0.1:8000/accounts/get/'
+
 export default {
   name: 'Community',
   data() {
     return {
       movies: [],
+      reviewData: {
+        score: null,
+        content: '',
+      },
     }
   },
   methods: {
@@ -60,10 +73,14 @@ export default {
           Authorization: `Token ${this.$cookies.get('auth-token')}`
         },
       }
+      console.log(config)
       axios.post(MOIVE_API_URL + `${movie.DOCID}/watched/`, movie, config)
       .then(res => console.log(res))
       .catch(err => console.error(err))
-    }
+    },
+    createReview() {
+      console.log(this)
+    },
   },
   created() {
     const movie_list = []
@@ -75,9 +92,18 @@ export default {
       }
       // console.log(movie_list)
       this.movies = movie_list
+      console.log(res)
       console.log(this.movies)
     })
     .catch(err => console.error(err))
+    const config = {
+      headers: {
+        Authorization: `Token ${this.$cookies.get('auth-token')}`
+      },
+    }
+    axios.get(USER_API_URL, {}, config)
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
   }
 }
 </script>
