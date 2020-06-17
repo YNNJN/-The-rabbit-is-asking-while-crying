@@ -9,20 +9,16 @@
         <img src="@/assets/anonymous.png" class="rounded-circle d-inine mr-5" widtn="90" height="90">
       </div>
       <div class="d-inline">
-        <p class="lead d-inline mx-2" style="font-size: 1.8rem">{{ infos[1].username }}</p>
+        <p class="lead d-inline mx-2" style="font-size: 1.8rem">{{ user_info.username }}</p>
         <div class="d-inline btn btn-outline-dark btn-sm mx-2">Edit Profile</div>
         <i class="fas fa-cog mx-2"></i>
       </div>
-      <!-- <div class="follow_text">
-        <p class="d-inline mr-4">followers  |</p> 
-        <p class="d-inline mr-4">following</p>
-      </div> -->
     </div>
     <!-- 유저 목록, follow를 위해 버튼 클릭 -->
-    <p class="text-center mt-5">다른 유저의 플레이리스트를 만나보세요 👉</p>
+    <p class="playlist_text text-center mt-5">다른 유저의 플레이리스트를 만나보세요 👉</p>
     <div class="d-flex justify-content-center">
       <span v-for="user in users" :key="user.username">
-        <a @click="follow(user)" class="mx-3 text-decoration-none text-reset">{{ user.username }}</a>
+        <a @click="follow(user)" class="badge badge-pill badge-light mx-3 text-decoration-none text-reset">{{ user.username }}</a>
       </span>
     </div>
 
@@ -39,6 +35,7 @@ import ArticleCreate from '@/components/articles/ArticleCreate.vue'
 import ArticleList from '@/components/articles/ArticleList.vue'
 
 const SERVER_URL = 'http://127.0.0.1:8000/'
+const USER_API_URL = 'http://127.0.0.1:8000/accounts/user_info/'
 
 export default {
   name: 'UserPageView',
@@ -50,9 +47,11 @@ export default {
     return {
       articles: [],
       isCreate: true,
-      infos: [],
       users: [],
       username: [],
+      user_info: Object,
+      following_users: [],
+      followed: false,
     }
   },
   props: {
@@ -80,13 +79,7 @@ export default {
     editCreate(isCreate) {
       this.isCreate = isCreate
     },
-    getMyinfo() {
-      axios.get(SERVER_URL + 'accounts/' + `${this.username}`)
-      .then(res => {
-        this.infos = res.data
-
-      })
-    },
+    // all users list
     getUsers() {
       axios.get(SERVER_URL + 'accounts/')
       .then(res => {
@@ -97,20 +90,47 @@ export default {
       })
     },
     follow(user) {
-      axios.post(SERVER_URL + 'accounts/' + `${user.username}/` +'follow/')
-
-      axios.get(SERVER_URL + 'accounts/' + `${user.username}/`) // back에서 문제가 있음, 해당 url에서 typeError
+      axios.post(SERVER_URL + 'accounts/profile/' + `${user.username}/` +'follow/') // follow
       .then(res => {
+        this.followed = true
         console.log(res)
-        console.log('test')
+        console.log('sss')
       })
+
+      axios.get(SERVER_URL + 'accounts/profile/' + `${user.username}/`) // profile
+      .then(res => {
+        const name_list = res.data.followers
+        const temp = []
+        for (let idx = 0; idx < name_list.length; idx++) {
+          const user_name = name_list[idx]
+          axios.get(SERVER_URL + 'accounts/profile/' + `${user_name}/`)
+          .then(res => {
+            temp.push(res.data)
+          })
+        }
+        this.following_users = temp
+      })
+      .catch(err => console.log(err))
     }
   },
   created() {
     this.fetchArticles()
+
+    // get my information
+    const config = {
+      headers: {
+        Authorization: `Token ${this.$cookies.get('auth-token')}`
+      },
+    }
+    axios.get(USER_API_URL, config)
+    .then(res => {
+      this.user_info = res.data
+      // console.log(this.user_info)
+    })
+    .catch(err => console.log(err))
   },
+
   mounted() {
-    this.getMyinfo()
     this.getUsers()
   },
 }
@@ -146,4 +166,12 @@ export default {
   font-style: normal;
 }
 
+.playlist_text {
+  color: #5d4c5f;
+  padding-top: 4rem;
+  font-size: 1.1rem;
+  font-family: 'NeoDunggeunmo';
+  font-weight: normal;
+  font-style: normal;
+}
 </style>
