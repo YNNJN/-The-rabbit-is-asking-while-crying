@@ -6,6 +6,7 @@ import SignupView from '../views/accounts/SignupView.vue'
 import LoginView from '../views/accounts/LoginView.vue'
 import UserPageView from '../views/UserPageView.vue'
 import PickMovieView from '../views/PickMovieView.vue'
+import ScoreView from '../views/community/ScoreView.vue'
 // import ReviewListView from '../views/articles/ReviewListView.vue'
 // import ReviewCreateView from '../views/articles/ReviewCreateView.vue'
 
@@ -41,6 +42,11 @@ Vue.use(VueRouter)
     path: '/movies/pickmovie',
     name: 'PickMovie',
     component: PickMovieView
+  },
+  {
+    path: '/community/score',
+    name: 'Score',
+    component: ScoreView,
   },
 ]
 

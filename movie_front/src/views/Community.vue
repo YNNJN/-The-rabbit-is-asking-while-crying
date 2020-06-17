@@ -6,8 +6,10 @@
       <div v-for="movie in movies" :key="movie.DOCID" class="col-md-2">
         <div class="card_form card text-center p-2 border-0">
           <p class="card-title text-secondary"> {{ movie.title }}</p>
-          <button v-if="!isWatched(movie)" @click="watchedMovie(movie)" class="badge badge-light" data-toggle="modal" :data-target="'#scoremovie'+movie.DOCID">watched</button>
-          <button v-if="isWatched(movie)" @click="watchedMovie(movie)" class="badge badge-light">watched</button>
+          <router-link :to="{ name: 'Score', query: { movie: movie } }"><button>아아아</button></router-link>
+          
+          <button @click="watchedMovie(movie, $event)" class="badge badge-light" data-toggle="modal" :data-target="'#scoremovie'+movie.DOCID">watched</button>
+          <button @click="watchedMovie(movie, $event)" class="badge badge-light">watched</button>
           <img :src="movie.posters" class="card-img-top" :alt="movie.title">
         </div>
         <div class="modal fade" :id="'scoremovie'+movie.DOCID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -59,23 +61,23 @@ export default {
       user: Object,
     }
   },
-  computed: {
-    isWatched(movie) {
-      return movie.watched.some(temp_watched => {
-        temp_watched == this.user.id
-      })    
-    },
-  },
   methods: {
-    watchedMovie(movie) {
+    watchedMovie(movie, event) {
+      console.log(movie)
+      console.log(this.user)
+      console.log(event.target)
+      if (movie.watched.length) {
+        console.log(movie)
+      } else {
+        console.log('nothing')
+      }
       const config = {
         headers: {
           Authorization: `Token ${this.$cookies.get('auth-token')}`
         },
       }
-      console.log(movie)
       axios.post(MOIVE_API_URL + `${movie.DOCID}/watched/`, movie, config)
-      .then(res => console.log(res))
+      .then(() => {})
       .catch(err => console.error(err))
     },
     createReview(movie) {
@@ -92,6 +94,7 @@ export default {
         })
         .catch(err => console.log(err.response.data))
     },
+    
   },
   created() {
     const movie_list = []
