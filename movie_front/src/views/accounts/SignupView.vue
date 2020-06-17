@@ -26,7 +26,7 @@
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
         <label class="form-check-label" for="exampleCheck1">Check me out</label>
       </div>
-      <button type="submit" class="btn btn-warning" @click="emitSignupSubmit">Sign Up</button>
+      <button type="submit" class="btn btn-success text-white mt-3" @click="emitSignupSubmit"><strong>Sign Up</strong></button>
     </div>
   </div>
 </template>

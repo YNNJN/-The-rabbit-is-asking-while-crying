@@ -37,21 +37,6 @@ Vue.use(VueRouter)
     name: 'Userpage',
     component: UserPageView
   },
-  // {
-  //   path: '/articles',
-  //   name: 'List',
-  //   component: ReviewListView
-  // },
-  // {
-  //   path: '/articles/create',
-  //   name: 'New',
-  //   component: ReviewCreateView,
-  //   beforeEnter: (to, from, next) => {
-  //     if (!Vue.$cookies.isKey('auth-token')) {
-  //       next({ name: 'Login' })
-  //     } else { next() }
-  //   }
-  // },
   {
     path: '/movies/pickmovie',
     name: 'PickMovie',

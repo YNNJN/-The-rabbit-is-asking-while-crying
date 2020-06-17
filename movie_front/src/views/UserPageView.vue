@@ -9,7 +9,7 @@
         <img src="@/assets/anonymous.png" class="rounded-circle d-inine mr-5" widtn="90" height="90">
       </div>
       <div class="d-inline">
-        <p class="lead d-inline mx-2" style="font-size: 1.8rem">user name</p>
+        <p class="lead d-inline mx-2" style="font-size: 1.8rem">{{ infos[1].username }}</p>
         <div class="d-inline btn btn-outline-dark btn-sm mx-2">Edit Profile</div>
         <i class="fas fa-cog mx-2"></i>
       </div>
@@ -19,9 +19,12 @@
       </div> -->
     </div>
     <!-- 유저 목록, follow를 위해 버튼 클릭 -->
-    <span v-for="user in users" :key="user.username">
-      <a @click="follow(user)" class="mx-3 text-decoration-none text-reset">{{ user.username }}</a>
-    </span>
+    <p class="text-center mt-5">다른 유저의 플레이리스트를 만나보세요 👉</p>
+    <div class="d-flex justify-content-center">
+      <span v-for="user in users" :key="user.username">
+        <a @click="follow(user)" class="mx-3 text-decoration-none text-reset">{{ user.username }}</a>
+      </span>
+    </div>
 
     <ArticleCreate :article="article" :isCreate="isCreate" @editCreate="editCreate"/>
     <ArticleList :articles="articles" :isCreate="isCreate" @getArticle="getArticle()" @editData="onEdit"/>
@@ -81,6 +84,7 @@ export default {
       axios.get(SERVER_URL + 'accounts/' + `${this.username}`)
       .then(res => {
         this.infos = res.data
+
       })
     },
     getUsers() {
@@ -141,4 +145,5 @@ export default {
   font-weight: normal;
   font-style: normal;
 }
+
 </style>
