@@ -29,3 +29,8 @@ def follow(request, username):
         person.followers.add(user)
     serializer = UserSerializer(instance=user)
     return Response(serializer.data)
+
+def get(request):
+    user = request.user
+    serializer = UserSerializer(user)
+    return Response(serializer.data)
