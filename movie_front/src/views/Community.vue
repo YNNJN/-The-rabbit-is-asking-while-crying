@@ -7,44 +7,13 @@
       <div class="row p-0 m-0">
         <div v-for="movie in movies" :key="movie.DOCID" class="col-md-2 p-0">
           <div class="card_box card text-center p-2 border-0">
-            <p class="card-title text-secondary"> {{ movie.title }}</p>
-            <router-link :to="{ name: 'Score', query: { movie: movie } }"><button>아아아</button></router-link>
-            <button @click="watchedMovie(movie, $event)" class="badge badge-light" data-toggle="modal" :data-target="'#scoremovie'+movie.DOCID">watched</button>
-            <button @click="watchedMovie(movie, $event)" class="badge badge-light">watched</button>
+            <p class="card_box_title"> {{ movie.title }}</p>
+            <router-link :to="{ name: 'Score', query: { movie: movie } }"><button class="watched_button badge badge-success mb-2">watched</button></router-link>
             <img :src="movie.posters" class="card-img-top" :alt="movie.title">
-          </div>
-          <div class="modal fade" :id="'scoremovie'+movie.DOCID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">{{ movie.title }}</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="form-group">
-                    <label for="InputScore">Score</label>
-                    <input type="text" class="form-control" id="InputScore" v-model="reviewData.score">
-                  </div>
-                  <div class="form-group">
-                    <label for="InputContent">CONTENT</label>
-                    <input type="text" class="form-control" id="InputContent" v-model="reviewData.content" row="30">
-                  </div>
-                  <button type="submit" class="btn btn-success" @click="createReview(movie)">Create</button>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
     </div>
-  
-
-
   </div>
 </template>
 
@@ -102,16 +71,11 @@ export default {
   border-radius: 0.8rem;
 }
 
-.ad_1 {
-  border-radius: 0.5rem;
-  border-left: thick solid #d8dcff;
-  padding: 2rem;
-}
-
-.ad_2 {
-  border-radius: 0.5rem;
-  border-left: thick solid palegreen;
-  padding: 2rem;
+.card_box_title {
+  color: #aeadf0;
+  font-family: 'NeoDunggeunmo';
+  font-weight: normal;
+  font-style: normal;
 }
 
 </style>
