@@ -2,7 +2,7 @@
     <div class="p-5">
         <p class="movie_title tag">{{ $route.query.movie.title }}</p>
         <div class="d-flex justify-content-center mb-5">
-          <input type="checkbox" class="mr-3"><p class="watched_check">watched</p>
+          <input type="checkbox" v-model="completed" class="mr-3" disabled><p class="watched_check">watched</p>
         </div>
 
 
@@ -69,6 +69,7 @@ export default {
         content: '',
         checked: true,
       },
+      completed: true,
     }
   },
   computed: {},
@@ -117,6 +118,9 @@ export default {
                 this.$router.push('/community')
             })
             .catch(err => console.error(err))
+    },
+    onClick() {
+      console.log(this)
     },
   },
   created() {

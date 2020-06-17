@@ -45,6 +45,7 @@ export default {
           if (movie_list[i].rating.slice(0,2) != 18 && movie_list[i].rating.slice(0,2) != "") {
             // console.log(movie_list[i].rating.slice(0,2))
             this.movies = movie_list
+            console.log(this.movies)
           }
         }
       }
