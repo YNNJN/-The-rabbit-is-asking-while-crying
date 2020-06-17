@@ -108,10 +108,13 @@ export default {
     .then(res => {
       for (let i = 0; i < 12; i++) {
         movie_list[i] = res.data[Math.floor(Math.random() * 1622)]
+        if (this.user.age < 19) {
+          if (movie_list[i].rating.slice(0,2) != 18 && movie_list[i].rating.slice(0,2) != "") {
+            // console.log(movie_list[i].rating.slice(0,2))
+            this.movies = movie_list
+          }
+        }
       }
-      // console.log(movie_list)
-      this.movies = movie_list
-      console.log(this.movies)
     })
     .catch(err => console.error(err))
     
