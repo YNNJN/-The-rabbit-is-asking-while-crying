@@ -140,9 +140,14 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 .table {
   width: 44rem;
   margin: auto;
+  color: slategray;
+  font-family: 'NeoDunggeunmo';
+  font-weight: normal;
+  font-style: normal;
 }
+
 </style>
