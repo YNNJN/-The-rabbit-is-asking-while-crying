@@ -1,25 +1,50 @@
 <template>
   <div class="Community p-5">
-    <div class="ad_1 float-right">
-      <p class="lead">당신의 금쪽같은 시간을 지켜드려요</p>
-      <p class="lead">기존의 자신이라면 선택하지 않았을지도 모르는 영화에서</p>
-      <p class="lead">영감을 얻어요</p>
-    </div>
-    <div class="ad_2">
-      <p class="lead">시간 떼우기 용도로 영화가 필요한 당신에게</p>
-      <p class="lead">편향된 추천으로, 매번 비슷한 추천 목록에 지친 당신에게</p>
-      <p class="lead">영화와 함께하는 짧은 휴식 후, 다음을 위한 활력을 얻고 싶은 당신에게</p>
-    </div>
-    <p>임의의 영화리스트 제공</p>
-    <div class="row p-3">
-      <div v-for="movie in movies" :key="movie.DOCID" class="col-md-2">
-        <div class="card_form card text-center p-2 border-0">
-          <p class="card-title text-secondary"> {{ movie.title }}</p>
-          <router-link :to="{ name: 'Score', query: { movie: movie } }"><button class="badge badge-light">watched</button></router-link>
-          <img :src="movie.posters" class="card-img-top" :alt="movie.title">
+    <h1 class="page_title mb-5 text-center">watched</h1>
+    <p class="lead text-center">랜덤으로 제공되는 영화 모음에 대해 '봤어요'를 표시하세요</p>
+    <div class="p-4"></div>
+    <div class="container p-0 pt-5 mt-5">
+      <div class="row p-0 m-0">
+        <div v-for="movie in movies" :key="movie.DOCID" class="col-md-2 p-0">
+          <div class="card_box card text-center p-2 border-0">
+            <p class="card-title text-secondary"> {{ movie.title }}</p>
+            <router-link :to="{ name: 'Score', query: { movie: movie } }"><button>아아아</button></router-link>
+            <button @click="watchedMovie(movie, $event)" class="badge badge-light" data-toggle="modal" :data-target="'#scoremovie'+movie.DOCID">watched</button>
+            <button @click="watchedMovie(movie, $event)" class="badge badge-light">watched</button>
+            <img :src="movie.posters" class="card-img-top" :alt="movie.title">
+          </div>
+          <div class="modal fade" :id="'scoremovie'+movie.DOCID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">{{ movie.title }}</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="InputScore">Score</label>
+                    <input type="text" class="form-control" id="InputScore" v-model="reviewData.score">
+                  </div>
+                  <div class="form-group">
+                    <label for="InputContent">CONTENT</label>
+                    <input type="text" class="form-control" id="InputContent" v-model="reviewData.content" row="30">
+                  </div>
+                  <button type="submit" class="btn btn-success" @click="createReview(movie)">Create</button>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  
+
+
   </div>
 </template>
 
@@ -47,13 +72,16 @@ export default {
     .then(res => {
       for (let i = 0; i < 12; i++) {
         movie_list[i] = res.data[Math.floor(Math.random() * 1622)]
+        if (this.user.age < 19) {
+          if (movie_list[i].rating.slice(0,2) != 18 && movie_list[i].rating.slice(0,2) != "") {
+            // console.log(movie_list[i].rating.slice(0,2))
+            this.movies = movie_list
+          }
+        }
       }
-      // console.log(movie_list)
-      this.movies = movie_list
-      console.log(res)
-      console.log(this.movies)
     })
     .catch(err => console.error(err))
+    
     const config = {
       headers: {
         Authorization: `Token ${this.$cookies.get('auth-token')}`
@@ -62,15 +90,18 @@ export default {
     axios.get(USER_API_URL, config)
     .then(res => {
       this.user = res.data
-      console.log(this.user)
     })
     .catch(err => console.log(err))
-    console.log(this)
   }
 }
 </script>
 
-<style>
+<style scoped>
+.card_box {
+  background-color: #5d4c5f;
+  border-radius: 0.8rem;
+}
+
 .ad_1 {
   border-radius: 0.5rem;
   border-left: thick solid #d8dcff;

@@ -19,8 +19,8 @@
     </div>
 
     <!-- modal -->
-    <div class="modal fade" id="minuteModal" tabindex="-1" role="dialog" aria-labelledby="minuteModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
+    <div class="modal fade bd-example-modal-lg" id="minuteModal" tabindex="-1" role="dialog" aria-labelledby="minuteModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="minuteModalLabel">30분 분량의 영화를 만나보세요</h5>
@@ -28,16 +28,21 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            <div v-for=" movie in movie_thirty" :key="movie.DOCID">
-              {{ movie.title }}
+          <div class="row modal-body">
+            <div v-for=" movie in movie_thirty" :key="movie.DOCID" class="abstract text-left">
+              <p class="title_tag"><strong>영화명: {{ movie.title }}</strong></p>
+              <div class="p-0">
+                <p class="badge badge-success text-white">{{ movie.genre }} {{ movie.rating }}</p>
+                <p v-if="movie.directorNm.length"><strong>감독명:</strong> {{ movie.directorNm }}</p>
+                <p v-if="movie.keywords.length"><strong>키워드:</strong> {{ movie.keywords }}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="modal fade" id="hourModal" tabindex="-1" role="dialog" aria-labelledby="hourModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
+    <div class="modal fade bd-example-modal-lg" id="hourModal" tabindex="-1" role="dialog" aria-labelledby="hourModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="hourModalLabel">60분 분량의 영화를 만나보세요</h5>
@@ -45,9 +50,14 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            <div v-for=" movie in movie_sixty" :key="movie.DOCID">
-              {{ movie.title }}
+          <div class="row modal-body">
+            <div v-for=" movie in movie_sixty" :key="movie.DOCID" class="abstract text-left">
+              <p class="title_tag"><strong>영화명: {{ movie.title }}</strong></p>
+              <div class="p-0">
+                <p class="badge badge-success text-white">{{ movie.genre }} {{ movie.rating }}</p>
+                <p v-if="movie.directorNm.length"><strong>감독명:</strong> {{ movie.directorNm }}</p>
+                <p v-if="movie.keywords.length"><strong>키워드:</strong> {{ movie.keywords }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -193,5 +203,22 @@ export default {
   font-weight: bold;
   font-style: normal;
   margin: auto;
+}
+
+.abstract {
+  background-color: #f5f5f5;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  margin: 1rem;
+  width: 350px;
+}
+
+.title_tag {
+  background-color: paleturquoise;
+  border-radius: 1rem;
+  width: 15rem;
+  font-family: 'NeoDunggeunmo';
+  font-weight: normal;
+  font-style: normal;
 }
 </style>

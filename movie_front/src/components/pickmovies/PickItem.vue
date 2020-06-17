@@ -30,7 +30,10 @@
 </template>
 
 <script>
+import axios from 'axios'
 import PickMovieDetail from './PickMovieDetail.vue'
+
+const USER_API_URL = 'http://127.0.0.1:8000/accounts/user_info/'
 
 export default {
   name: 'PickItem',
@@ -47,15 +50,22 @@ export default {
     return {
       movie: [],
       show_on: false,
+      user_info: Object,
     }
   },
   methods: {
     onPoint(value) {
-      console.log(value)
       this.movies.forEach(temp_movie => {
         if (temp_movie.runtime === value) {
-          console.log(temp_movie)
-          return this.movie.push(temp_movie)
+          if (this.user_info.age < 19) {
+            if (temp_movie.rating.slice(0,2) != 18 && temp_movie.rating.slice(0,2) != "") {
+              // console.log(temp_movie.rating.slice(0,2))
+              return this.movie.push(temp_movie)
+            } 
+          }
+          else if (this.user_info.age > 19) {
+            return this.movie.push(temp_movie)
+          }
         }
       })
       this.value = ''
@@ -64,7 +74,21 @@ export default {
   },
   computed: {
 
-  }
+  },
+  created() {
+    // get my information
+    const config = {
+      headers: {
+        Authorization: `Token ${this.$cookies.get('auth-token')}`
+      },
+    }
+    axios.get(USER_API_URL, config)
+    .then(res => {
+      this.user_info = res.data
+      // console.log(this.user_info.age)
+    })
+    .catch(err => console.log(err))
+  },
 }
 </script>
 

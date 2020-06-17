@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container mt-3">
-      <table class="table table-hover ">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -140,6 +140,14 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+.table {
+  width: 44rem;
+  margin: auto;
+  color: slategray;
+  font-family: 'NeoDunggeunmo';
+  font-weight: normal;
+  font-style: normal;
+}
 
 </style>
