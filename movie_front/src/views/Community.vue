@@ -85,7 +85,7 @@ export default {
           Authorization: `Token ${this.$cookies.get('auth-token')}`
         },
       }
-      axios.post(MOIVE_API_URL + `${movie.DOCID}/watched/`, movie, config)
+      axios.post(MOIVE_API_URL + `movie/${movie.DOCID}/watched/`, movie, config)
       .then(() => {})
       .catch(err => console.error(err))
     },
@@ -95,7 +95,7 @@ export default {
           Authorization: `Token ${this.$cookies.get('auth-token')}`
         },
       }
-      axios.post(MOIVE_API_URL + `${movie.DOCID}/review_create/`, this.reviewData, config)
+      axios.post(MOIVE_API_URL + `movie/${movie.DOCID}/review_create/`, this.reviewData, config)
         .then(res => {
           console.log(res) 
           this._data.reviewData.score=''
