@@ -59,46 +59,10 @@ export default {
   data() {
     return {
       movies: [],
-      reviewData: {
-        score: null,
-        content: '',
-      },
       user: Object,
     }
   },
   methods: {
-    watchedMovie(movie, event) {
-      console.log(movie)
-      console.log(this.user)
-      console.log(event.target)
-      if (movie.watched.length) {
-        console.log(movie)
-      } else {
-        console.log('nothing')
-      }
-      const config = {
-        headers: {
-          Authorization: `Token ${this.$cookies.get('auth-token')}`
-        },
-      }
-      axios.post(MOIVE_API_URL + `${movie.DOCID}/watched/`, movie, config)
-      .then(() => {})
-      .catch(err => console.error(err))
-    },
-    createReview(movie) {
-      const config = {
-        headers: {
-          Authorization: `Token ${this.$cookies.get('auth-token')}`
-        },
-      }
-      axios.post(MOIVE_API_URL + `${movie.DOCID}/review_create/`, this.reviewData, config)
-        .then(res => {
-          console.log(res) 
-          this._data.reviewData.score=''
-          this._data.reviewData.content=''
-        })
-        .catch(err => console.log(err.response.data))
-    },
     
   },
   created() {

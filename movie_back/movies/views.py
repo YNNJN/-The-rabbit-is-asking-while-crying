@@ -32,18 +32,20 @@ def watched(request, movie_id):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def review_create(request, movie_DOCID):
-    movie = get_object_or_404(Movie, pk=movie_DOCID)
+def review_create(request, movie_id):
+    movie = get_object_or_404(Movie, pk=movie_id)
+    print(request.data)
     serializer = ReviewSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
+        print('OK')
         serializer.save(user=request.user, movie=movie)
         return Response(serializer.data)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def review_delete(request, movie_pk):
-#     review = Review.objects.all().filter(Q(movie.id=movie_pk) & Q(user=request.user))
-#     review.delete()
-#     serializer = ReviewSerializer(review)
-#     return Response(serializer.data)
-    pass
+def review_delete(request, movie_id):
+    movie = get_object_or_404(Movie, pk=movie_id)
+    review = Review.objects.filter(Q(movie=movie) & Q(user=request.user))
+    review.delete()
+    serializer = ReviewSerializer(review)
+    return Response(serializer.data)
