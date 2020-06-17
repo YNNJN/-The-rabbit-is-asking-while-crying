@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1 class="bold mb-5 text-center">Movie List</h1>
+    <div class="p-4"></div>
     <div class="movieList row">
       <MovieListItem
         :movie="movie"
