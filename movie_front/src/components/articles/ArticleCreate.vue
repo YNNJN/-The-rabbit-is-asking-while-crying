@@ -12,7 +12,7 @@
           <textarea class="form-control" id="exampleInputContent" v-model="articleData.content" row="10"></textarea>
         </div>
         <div class="button_group">
-          <button v-if="isCreate" type="submit" class="btn btn-success text-white" @click="createArticle"><strong>Create</strong></button>
+          <button v-if="isCreate" type="submit" class="btn btn-success text-white" @click="createArticle"><strong>Update</strong></button>
           <button v-if="!isCreate" type="submit" class="btn btn-warning" @click="editArticle"><strong>Edit</strong></button>
         </div>
       </div>
