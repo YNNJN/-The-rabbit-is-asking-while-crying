@@ -16,7 +16,7 @@ def index(request):
 @api_view(['GET'])
 def profile(request, username):
     user = get_object_or_404(User, username=username)
-    serializer = UserSerializer(intance=user)
+    serializer = UserSerializer(user)
     return Response(serializer.data)
 
 @api_view(['GET'])
@@ -34,14 +34,13 @@ def follow(request, username):
         person.followers.remove(user)
     else:
         person.followers.add(user)
-    serializer = UserSerializer(instance=request.user)
+    serializer = UserSerializer(request.user)
     return Response(serializer.data)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def user_info(request):
     user = request.user
-    print(user)
     # from django.http import HttpResponse
     # return HttpResponse('ok')
     serializer = UserSerializer(user)
