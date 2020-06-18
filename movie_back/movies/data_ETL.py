@@ -6,7 +6,9 @@ from pandas.io.json import json_normalize
 
 # ========================== 데이터 Extraction ==========================
 
-Servicekey = '04SY8J71WZ1Q1761IC2I'
+from  decouple import config
+Servicekey = config('Servicekey')
+
 base_url = 'http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2'
 url = base_url + f'&ServiceKey={Servicekey}&listCount=1000&startCount=50'
 
