@@ -42,12 +42,8 @@
         </v-card>
         <div class="score_form">
           <div class="form-group">
-              <label for="InputScore">Score</label>
-              <input type="text" class="form-control" id="InputScore" v-model="reviewData.score">
-          </div>
-          <div class="form-group">
               <label for="InputContent">CONTENT</label>
-              <input type="text" class="form-control" id="InputContent" v-model="reviewData.content" row="30">
+              <textarea type="text" class="form-control" id="InputContent" v-model="reviewData.content" row="30"></textarea>
           </div>
           <button type="submit" class="btn btn-success" @click="createReview($route.query.movie)">Create</button>
         </div>
